@@ -1,0 +1,157 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\VisitorType;
+use Illuminate\Http\Request;
+
+use Carbon\Carbon;
+use Validator;
+
+class VisitorTypeController extends Controller
+{
+    // Display a list of all visitor types
+    public function index()
+    {
+        $visitorTypes = VisitorType::all();
+        return view('visitor_type.index', compact('visitorTypes'));
+    }
+
+    // Show the form for creating a new visitor type or editing an existing one
+    public function show($id = null)
+    {
+        $visitorType = null;
+        if ($id) {
+            // Find the visitor type by ID for editing
+            $visitorType = VisitorType::findOrFail($id);
+        }
+
+        return view('visitor_type.index', compact('visitorType'));
+    }
+
+    // Save the visitor type (either create or update)
+    public function save(Request $request)
+    {     
+        $userId = auth()->id();
+
+        $validator = Validator::make($request->all(), 
+            [
+                'type_name'   => [
+                    'required',
+                    'string',
+                    function ($attribute, $value, $fail) use ($request) {
+                        $count = VisitorType::withoutTrashed()
+                                    ->where('type_name', $value)
+                                    ->where('id', '!=', $request->record_id)
+                                    ->count();
+                        
+                        if ($count > 0) {
+                            $fail('Duplicate Entry.');
+                        }
+                    }
+                ]
+            ], 
+            ['type_name.unique' => 'Duplicate Entry.']
+        );
+
+        if ($validator->fails()) return response()->json(['errors'=>$validator->errors()]);
+        
+        $data = ['type_name' => $request->type_name];
+
+        if($request->record_id > 0) 
+        {
+            $data['updated_by'] = $userId;
+            $type               = "updated";
+            $record             = VisitorType::find($request->record_id);
+            $record->update($data);
+
+        } 
+        else
+        {
+            $data['created_by'] = $userId;
+            $type               = "inserted";
+            $record             = VisitorType::create($data);
+        }
+
+        return response()->json(['You have successfully '. $type .' '. $request->type_name]);
+    }
+
+    // Delete a visitor type
+    public function delete(Request $request)
+    {
+        // $userType = UserType::findOrFail($id);
+        // $userType->delete();
+        // return redirect()->route('usertype.index')->with('success', 'Visitor Type deleted successfully!');
+        
+        $record  = VisitorType::find($request->id);
+        $details = $record->type_name;
+        $record->update(['deleted_by' => auth()->id()]);
+        $record->delete();
+        return response()->json(['You have successfully delete '. $details]);
+    }
+
+    // Return a list of visitor types for AJAX requests or other purposes
+    public function list(Request $request)
+    {
+   
+        $keywords = request()->input('search.value');
+        $limit = request()->input('length');
+        $start = request()->input('start');
+        $orderColumnIndex = request()->input('order.0.column');
+        $orderDir = request()->input('order.0.dir');
+        $columns = ['id', 'type', 'created_at', 'created_by', 'updated_at', 'updated_by'];
+    
+        $visitorTypeQuery = VisitorType::with('createdBy', 'updatedBy')
+                            ->when(!empty($keywords) && is_string($keywords), function ($query) use ($keywords) {
+                                $query->where('type', 'LIKE', "%{$keywords}%");
+                            });
+                        
+        $filteredQuery = clone $visitorTypeQuery;
+    
+        $totalRecords = $filteredQuery->count();
+    
+        $visitorTypes = $visitorTypeQuery->orderBy($columns[$orderColumnIndex], $orderDir)
+                        ->offset($start)
+                        ->limit($limit)
+                        ->get();
+    
+        $newData = [];
+        foreach ($visitorTypes as $visitorType) {
+            $newData[] = [
+                'id'            => $visitorType->id,
+                'type_name'     => $visitorType->type_name,
+                'created_at'    => Carbon::parse($visitorType->created_at)->setTimezone('Asia/Manila')->format('F j, Y, g:i a'),
+                'created_by'    => $visitorType->createdBy ? $visitorType->createdBy->username : 'N/A',
+                'updated_by'    => $visitorType->updatedBy ? $visitorType->updatedBy->username : 'N/A',
+                'action' => "
+                <div class='dropdown'>
+                    <button class='btn btn-sm border-0 bg-transparent text-dark' type='button' id='actionDropdown{$visitorType->id}' data-bs-toggle='dropdown' aria-expanded='false'>
+                        &#8942; <!-- Unicode for vertical ellipsis -->
+                    </button>
+                    <ul class='dropdown-menu' aria-labelledby='actionDropdown{$visitorType->id}'>
+                        <li>
+                            <button class='dropdown-item btn-edit' data-id='{$visitorType->id}'>Edit</button>
+                        </li>
+                        <li>
+                            <button class='dropdown-item btn-delete' data-id='{$visitorType->id}' data-details='{$visitorType->type_name}'>Delete</button>
+                        </li>
+                    </ul>
+                </div>",
+            ];
+        }
+
+        return response()->json([
+            'draw' => intval(request()->input('draw')),
+            'recordsTotal' => VisitorType::count(),
+            'recordsFiltered' => $totalRecords,
+            'data' => $newData
+
+        ]);
+    }
+
+    public function search(Request $request)
+    {        
+        $record = VisitorType::find($request->id);
+        return response()->json($record);
+    }
+}

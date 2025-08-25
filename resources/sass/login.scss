@@ -1,0 +1,276 @@
+#login{
+    background: linear-gradient(to bottom, #0a4b9e, #3998ed); 
+    height: 100vh;
+}
+
+#login-containers {
+        .object{
+            position: absolute; 
+            height: 100vh;
+        }
+
+        .login-form-container{
+            position: absolute; 
+            top: 52.5%; 
+            right: 7%; 
+            transform: translateY(-55%); 
+            width: 630px;
+        }
+
+        .forma{
+            box-shadow: 0 8px 20px rgba(10, 75, 158, 0.5); 
+            border:1px solid #0A4B9E; 
+            border-radius: 20px;
+        }
+
+        .logintxt{
+            font-size: 2.5rem; 
+            color: #0A4B9E; 
+            font-weight: bold;
+        }
+
+        .form-control {
+            background: linear-gradient(to bottom, #0a4b9e, #3998ed); 
+            border: none !important;
+            color: white !important;
+            padding: 16px !important;
+        }
+
+        .form-control:focus {
+            box-shadow: none !important; 
+            border: none !important;    
+        }
+
+        span{
+            background: linear-gradient(to bottom, #0a4b9e, #3998ed); 
+        }
+
+        .input-group{
+            height: auto; 
+            border-radius: 30px; 
+            overflow: hidden;
+        }
+
+        .btn{
+            background-color: #0A4B9E !important; 
+            color: white !important; 
+            padding: 16px !important; 
+            font-size: 16px !important; 
+            border: none !important;
+            letter-spacing: 2px;
+        }
+        
+        .clouds-container {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100vh;
+            background: url('/public/images/cloudss.png') no-repeat center;
+            background-size: cover;
+            z-index: 1;
+        }
+
+        .row {
+            flex-wrap: wrap; /* Ensures proper wrapping on smaller screens */
+        }
+
+        .logo-container img {
+            width: 90%;
+            max-width: 100%;
+        }
+
+        ::placeholder {
+            color: white !important;
+            opacity: 1;
+        }
+
+        .btn-login {
+            background-color: #0A4B9E !important;
+            color: white !important;
+            padding: 16px !important;
+            font-size: 16px !important;
+            border: none !important;
+        }
+
+        /* Responsive Fix: Adjusts layout for small screens */
+        @media (max-width: 1570px) {
+            .clouds-container {
+                width: 100vh; 
+                background-position: top center;
+            }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 1450px) {
+            .logo-container img {
+                content: url('/public/images/logo2.png'); 
+                width: 450px !important; 
+                position: fixed;
+                bottom: 63%; 
+                left: 80%; 
+                transform:translate(-70%)!important;
+            }
+        }
+
+        @media (max-width: 1350px) {
+            .logo-container img {
+                content: url('/public/images/logo2.png'); 
+                width: 450px !important; 
+                position: fixed;
+                bottom: 63%; 
+                left: 78%; 
+                transform:translate(-70%)!important;
+            }
+        }
+
+        @media (max-width: 1250px) {
+            .logo-container img {
+                content: url('/public/images/logo2.png'); 
+                width: 450px !important; 
+                position: absolute;
+                bottom: 63%; 
+                left: 76%; 
+                transform:translate(-70%)!important;
+            }
+        }
+
+        @media (max-width: 1150px) {
+            .logo-container img {
+                content: url('/public/images/logo2.png'); 
+                width: 450px !important; 
+                position: fixed;
+                bottom: 63%; 
+                left: 74%; 
+                transform:translate(-70%)!important;
+            }
+        }
+
+        @media (max-width: 1050px) {
+            .logo-container img {
+                content: url('/public/images/logo2.png'); 
+                width: 450px !important; 
+                position: fixed;
+                bottom: 63%; 
+                left: 73%; 
+                transform:translate(-70%)!important;
+            }
+        }
+
+        @media (max-width: 950px) {
+            .logo-container img {
+                content: url('/public/images/logo2.png'); 
+                width: 450px !important; 
+                position: fixed;
+                bottom: 63%; 
+                left: 72%; 
+                transform:translate(-70%)!important;
+            }
+        }
+
+        @media (max-width: 850px) {
+            .logo-container img {
+                content: url('/public/images/logo2.png'); 
+                width: 450px !important; 
+                position: fixed;
+                bottom: 63%; 
+                left: 70%; 
+                transform:translate(-70%)!important;
+            }
+        }
+
+        @media (max-width: 790px) {
+            .logo-container img {
+                content: url('/public/images/logo2.png'); 
+                width: 450px !important; 
+                position: fixed;
+                bottom: 63%; 
+                left: 70%; 
+                transform:translate(-70%)!important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo-container img {
+                content: url('/public/images/logo2.png'); 
+                width: 300px !important; 
+                position: relative;
+                bottom: 145%; 
+            left: 43%; 
+                
+            }
+        }
+
+        @media (max-width: 580px) {
+            .logo-container img {
+                content: url('/public/images/logo2.png'); 
+                width: 300px !important; 
+                position: relative;
+                bottom: 145%; 
+            left: 50%; 
+                
+            }
+        }
+
+        @media (max-width: 550px) {
+            .logo-container img {
+                content: url('/public/images/logo2.png'); 
+                width: 300px !important; 
+                position: relative;
+                bottom: 145%; 
+            left: 52%; 
+                
+            }
+        }
+
+        @media (max-width: 525px) {
+            .logo-container img {
+                content: url('/public/images/logo2.png'); 
+                width: 300px !important; 
+                position: relative;
+                bottom: 145%; 
+            left: 55%; 
+                
+            }
+        }
+
+        @media (max-width:500px) {
+            .logo-container img {
+                content: url('/public/images/logo2.png'); 
+                width: 250px !important; 
+                position: relative;
+                bottom: 170%; 
+            left: 50%;
+            }
+        }
+
+        @media (max-width:450px) {
+            .logo-container img {
+                content: url('/public/images/logo2.png'); 
+                width: 250px !important; 
+                position: relative;
+                bottom: 170%; 
+            left: 57%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .forma {
+                position: relative;
+                left: -5%!important; 
+                top: 90px;
+                
+                width: 75%!important; 
+            }
+        }
+
+        @media (max-width: 1450px) {
+            .forma {
+                position: relative;
+                left: 20px;  
+                top: 70px;
+                margin-left: 7.5%; 
+                width: 85%; 
+            }
+        }
+        }
+}

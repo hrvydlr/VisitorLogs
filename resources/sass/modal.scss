@@ -1,0 +1,101 @@
+@import 'variables';
+
+.modal-header {
+    background-color: $main-color;
+    color: $main-text-color; /* Light background for header */
+    /* border-bottom: 1px solid #dee2e6; Border for header */
+}
+
+.modal-body {
+    color: $modal-text-color; /* Light background for header */ ;
+    display: flex;
+    align-items: center;
+}
+
+.modal-body .card-body {
+    width: 380px;
+}
+
+.label {
+    margin-left: 5px;
+    width: 40%; /* Allow label to take only necessary width */
+}
+
+small {
+    position: relative;
+    right: 98px;
+}
+
+.modal-dialog {
+    width: 80% !important; /* Set modal width */
+    height: $modal-height !important; /* Set modal height */
+}
+
+.modal-button {
+    width: 500px;
+    position: relative;
+    left: 0px;
+    padding: 10px;
+    border-radius: $modal-buttom-radius;
+    font-size: $modal-font-size;
+    background-color: $main-color; /* Button color */
+}
+
+.modal-button2 {
+    width: 476px;
+    position: relative;
+    left: 0px;
+    padding: 8px;
+    border-radius: $modal-buttom-radius;
+    font-size: $modal-font-size;
+    background-color: $main-color; /* Button color */
+}
+
+.modal-button-user {
+    width: 402px;
+    position: relative;
+    left: 0px;
+    padding: 8px;
+    border-radius: $modal-buttom-radius;
+    font-size: $modal-font-size;
+    background-color: $main-color; /* Button color */
+}
+
+/* --- Responsive Media Queries --- */
+@media (max-width: 768px) {
+    .modal-dialog {
+        width: 95% !important;
+    }
+
+    .modal-body .card-body {
+        width: 100%;
+    }
+
+    .modal-button,
+    .modal-button2,
+    .modal-button-user {
+        width: 100%;
+    }
+
+    .label {
+        width: 100%;
+    }
+
+    small {
+        right: 0;
+        display: block;
+        margin-top: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-dialog {
+        width: 100% !important;
+    }
+
+    .modal-button,
+    .modal-button2,
+    .modal-button-user {
+        font-size: calc(#{$modal-font-size} - 2px);
+    }
+}

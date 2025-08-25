@@ -1,0 +1,395 @@
+#visitor-log {
+    background: linear-gradient(rgb(10,75,158), rgb(21,106,197), rgb(57,152,237));
+    height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+#visitorLog-container {
+    .header {
+        background-image: url('/public/images/cloudss.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 75vw;
+        height: 100vh;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: -1;
+    }
+
+    .content {
+        position: absolute;
+        left: 9vw;
+        top: 42%;
+        color: white;
+        text-align: center;
+        transform: scale(1.5);
+        z-index: 1;
+    }
+
+    .logo {
+        width: 150px;
+        max-width: 150px;
+    }
+
+    h1 {
+        font-size: 2rem;
+        white-space: nowrap;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        width: 52%;
+        max-width: 1200px;
+        background-color: white;
+        border-radius: 10px;
+        padding: 30px;
+        filter: drop-shadow(0px 16px 20px hsl(46deg, 0%, 90%));
+        position: absolute;
+        left: 72%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        gap: 45px;
+        z-index: 2;
+    }
+
+    .form-fields {
+        width: 55vh;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .camera-container {
+        width: 100%;
+        max-width: 380px;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        left: 60%;
+    }
+
+    .camera {
+        background-color: white;
+        border-radius: 10px;
+        padding: 20px;
+        width: 380px;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        filter: drop-shadow(0px 16px 20px hsl(46deg, 0%, 90%));
+    }
+
+    .camera-buttons {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        bottom: 5px;
+        left: 0;
+        padding: 15px;
+    }
+
+    /* Camera Section */
+    #my_camera {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        aspect-ratio: 4 / 3; /* Optional, helps maintain webcam aspect */
+        transform: scaleX(-1); /* Flip horizontally */
+        border-radius: 5px;
+        overflow: hidden;
+        border: none!important;
+    }
+
+    #my_camera img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    #my_camera video {
+        width: 100% !important;
+        height: auto !important;
+        border-radius: 5px;
+        object-fit: cover;
+    }
+    
+
+    #image-error {
+        display: none;
+        font-size: 0.875rem;
+        color: #dc3545;
+        margin-top: 0.5rem;
+    }
+
+    #captureBtn, #recaptureBtn {
+        width: 52%!important;
+        padding: 12px;
+        font-size: 0.9rem!important;
+        min-height: 40px;
+        gap: 10px!important;
+    }
+
+    #capturedImagePreview {
+        display: none;
+        width: 100%;
+        border-radius: 5px;
+    }
+    /* Form Controls */
+    .form .form-control,
+    .form .form-select {
+        width: 100%;
+        padding: 8px 12px;
+        font-size: 0.9rem;
+        min-height: 40px;
+    }
+
+    .form .btn-container {
+        margin-top: auto;
+        text-align: center;
+    }
+
+    .save-button {
+        padding: 10px;
+        font-size: 0.9rem;
+        width: 480px;
+        margin-left: 15px;
+        margin-bottom: 8px;
+    }
+
+    input, select, button {
+        background-color: #145ab0!important;
+        color: white!important;
+        border: none!important;
+        font-size: 1rem!important;
+    }
+
+    ::placeholder {
+        color: white!important;
+    }
+
+    .dropdown-menu {
+        width: 25% !important;
+        min-width: unset !important;
+    }
+
+    .form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        flex-wrap: wrap;
+    }
+
+    .toast .btn {
+        background-color: transparent !important;
+        border: none;
+        color: black!important;
+        font-size: 1.2rem;
+    }
+}
+
+ /* Responsive handling */
+ @media (min-width: 1201px) and (max-width: 2100px) {
+    .header {
+        width: 78vw;
+    }
+
+    .form-fields {
+        width: 58% !important;
+    }
+
+    form + .save-button {
+        width: 60% !important;
+    }
+
+    .camera-container {
+        width: 100%;
+        position: absolute !important;
+        bottom: 41%;
+        left: 58%;
+    }
+}
+
+@media (min-width: 993px) and (max-width: 1200px) {
+    .content {
+        position: absolute;
+        left: 3vw !important;
+        top: 42%;
+        color: white;
+        text-align: center;
+        transform: scale(0.9) !important;
+        z-index: 1;
+    }
+
+    .form {
+        width: 80%;
+        height: auto;
+        left: 50%;
+    }
+
+    .camera-container {
+        position: relative !important;
+        left: 60px !important;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+    #visitor-log {
+        overflow-y: hidden;
+    }
+
+    .content {
+        display: none;
+    }
+
+    .header {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    .form {
+        width: 98% !important;
+        top: 50% !important;
+        left: 50% !important;
+    }
+
+    .camera-container {
+        width: 90% !important;
+        position: absolute !important;
+        left: 552px !important;
+        top: 50px !important;
+    }
+
+    .form-fields {
+        gap: 0px !important;
+        width: 100% !important;
+        position: relative !important;
+        right: 180px !important;
+    }
+
+    .camera {
+        max-width: 100% !important;
+    }
+
+    form {
+        width: 60% !important;
+    }
+
+    .save-button {
+        width: 95% !important;
+        position: relative !important;
+        right: 180px !important;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+    .content {
+        display: none !important;
+    }
+
+    body {
+        overflow-y: auto !important;
+        background: none !important;
+    }
+
+    .form {
+        position: relative !important;
+        top: 30px !important;
+        transform: translateX(-75%) !important;
+        width: 80% !important;
+        height: auto !important;
+        padding: 15px !important;
+        margin-left: 0px;
+        flex-direction: column-reverse !important;
+    }
+
+    .camera-container {
+        width: 100% !important;
+        margin-top: 0px !important;
+        position: relative !important;
+        left: 80px;
+        top: -30px;
+    }
+
+    .camera {
+        max-width: 100% !important;
+    }
+
+    .form-fields {
+        width: 100% !important;
+        position: relative !important;
+        left: -10px !important;
+    }
+
+    .save-button {
+        width: 550px !important;
+        position: relative !important;
+        right: 20px;
+    }
+
+    form {
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 576px) {
+    #visitor-log {
+        overflow-y: auto;
+        background: none !important;
+    }
+
+    .content {
+        display: none !important;
+    }
+
+    .form {
+        position: relative !important;
+        top: 30px !important;
+        transform: translate(-75%, 0%) !important;
+        width: 80% !important;
+        height: auto !important;
+        padding: 15px !important;
+        margin-left: 0px;
+        flex-direction: column !important;
+    }
+
+    .camera-container {
+        position: relative !important;
+        left: -15px !important;
+        bottom: 30px;
+    }
+
+    .save-button {
+        position: relative !important;
+        right: 25px !important;
+        width: 350px !important;
+    }
+
+    .camera {
+        height: 300px;
+        max-width: 100%;
+    }
+
+    .form-fields {
+        width: 100%;
+        gap: 0px;
+        position: relative;
+        right: 12px !important;
+    }
+
+    form {
+        width: 100%;
+    }
+}
