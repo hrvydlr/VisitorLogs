@@ -15,11 +15,8 @@ class EnsureUserIsAdmin
     public function handle(Request $request, Closure $next): Response
     {
         $user = Auth::user();
-
-        // Check if user is logged in and has usertype "admin"
-        $typeName = strtolower(optional($user->userType)->type_name);
-        
-        if (!$user || $typeName !== 'admin') {
+           
+        if (!$user || $user->user_type != 1) {
             abort(403, 'Unauthorized access');
         }
 

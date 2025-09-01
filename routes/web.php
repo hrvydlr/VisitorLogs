@@ -16,24 +16,12 @@ use Illuminate\Support\Facades\Auth;
 
 
 Route::get('/', function () {
-    $user = Auth::user();
-
-    if (!$user) {
-        return redirect()->route('login'); // or return view('auth.login');
+    if (auth()->check()) {
+        $route = (auth()->user()->user_type == 1) ? 'visitor.index' : 'guard.index';
+        return redirect()->route($route);
     }
-
-    $typeName = strtolower(optional($user->userType)->type_name);
-
-    if ($typeName === 'guard') {
-        return redirect()->route('guard.index');
-    }
-
-    if ($typeName === 'admin') {
-        return redirect()->route('visitor.index');
-    }
-
-    abort(403, 'Unauthorized user type');
-})->middleware('auth');
+    return redirect()->route('login');
+});
 
 
 Auth::routes();  // Laravel's built-in authentication routes

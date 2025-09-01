@@ -15,15 +15,14 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('username')->unique();  // Unique username
-            $table->foreignId('user_type')->constrained('user_types')->onDelete('cascade');  // Foreign key to 'user_types' table
-            $table->string('password')->nullable();  // Allow null values for password
-            $table->string('created_by')->nullable();  // User who created the record
-            $table->string('updated_by')->nullable();  // User who updated the record
-            $table->timestamps();  // created_at and updated_at
-            $table->softDeletes();  // Soft delete for the user
-
-            // Optionally add a remember_token for session management
-            $table->rememberToken();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->integer('user_type');  
+            $table->string('password')->nullable();  
+            $table->string('created_by')->nullable(); 
+            $table->string('updated_by')->nullable(); 
+            $table->timestamps(); 
+            $table->softDeletes();  
         });
 
         // Create 'password_reset_tokens' table

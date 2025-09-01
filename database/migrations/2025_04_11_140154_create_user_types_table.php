@@ -8,11 +8,11 @@ class CreateUserTypesTable extends Migration
 {
     public function up()
     {
-        Schema::create('user_types', function (Blueprint $table) {
+        Schema::create('users_types', function (Blueprint $table) {
             $table->id();
-            $table->string('type_name'); // Name of the user type
-            $table->string('created_by')->nullable()->constrained('users')->onDelete('cascade');
-            $table->string('updated_by')->nullable()->constrained('users')->onDelete('cascade');
+            $table->string('name'); // Name of the user type
+            $table->string('created_by')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             $table->softDeletes();
@@ -22,6 +22,6 @@ class CreateUserTypesTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('user_types');
+        Schema::dropIfExists('users_types');
     }
 }

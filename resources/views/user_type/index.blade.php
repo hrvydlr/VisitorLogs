@@ -1,6 +1,6 @@
 
 @extends('layout')
-<body>
+
 
 @section('button')
     <div class="d-flex justify-content-end align-items-center mt-5 pt-5 w-100 ">
@@ -31,7 +31,7 @@
     'form_content'  => view('user_type.form',compact('userTypes'))->render()
 ])
 @endsection
-</body>
+
 
 @push('scripts')
 <script> let default_fields = {!!json_encode(config('constants.crud.user_type')) !!} </script>

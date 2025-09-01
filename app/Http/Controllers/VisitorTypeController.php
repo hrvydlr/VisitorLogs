@@ -36,12 +36,12 @@ class VisitorTypeController extends Controller
 
         $validator = Validator::make($request->all(), 
             [
-                'type_name'   => [
+                'name'   => [
                     'required',
                     'string',
                     function ($attribute, $value, $fail) use ($request) {
                         $count = VisitorType::withoutTrashed()
-                                    ->where('type_name', $value)
+                                    ->where('name', $value)
                                     ->where('id', '!=', $request->record_id)
                                     ->count();
                         
@@ -51,12 +51,12 @@ class VisitorTypeController extends Controller
                     }
                 ]
             ], 
-            ['type_name.unique' => 'Duplicate Entry.']
+            ['name.unique' => 'Duplicate Entry.']
         );
 
         if ($validator->fails()) return response()->json(['errors'=>$validator->errors()]);
         
-        $data = ['type_name' => $request->type_name];
+        $data = ['name' => $request->type_name];
 
         if($request->record_id > 0) 
         {
@@ -84,7 +84,7 @@ class VisitorTypeController extends Controller
         // return redirect()->route('usertype.index')->with('success', 'Visitor Type deleted successfully!');
         
         $record  = VisitorType::find($request->id);
-        $details = $record->type_name;
+        $details = $record->name;
         $record->update(['deleted_by' => auth()->id()]);
         $record->delete();
         return response()->json(['You have successfully delete '. $details]);
@@ -99,11 +99,11 @@ class VisitorTypeController extends Controller
         $start = request()->input('start');
         $orderColumnIndex = request()->input('order.0.column');
         $orderDir = request()->input('order.0.dir');
-        $columns = ['id', 'type', 'created_at', 'created_by', 'updated_at', 'updated_by'];
+        $columns = ['id', 'name', 'created_at', 'created_by', 'updated_at', 'updated_by'];
     
         $visitorTypeQuery = VisitorType::with('createdBy', 'updatedBy')
                             ->when(!empty($keywords) && is_string($keywords), function ($query) use ($keywords) {
-                                $query->where('type', 'LIKE', "%{$keywords}%");
+                                $query->where('name', 'LIKE', "%{$keywords}%");
                             });
                         
         $filteredQuery = clone $visitorTypeQuery;
@@ -119,7 +119,7 @@ class VisitorTypeController extends Controller
         foreach ($visitorTypes as $visitorType) {
             $newData[] = [
                 'id'            => $visitorType->id,
-                'type_name'     => $visitorType->type_name,
+                'type_name'     => $visitorType->name,
                 'created_at'    => Carbon::parse($visitorType->created_at)->setTimezone('Asia/Manila')->format('F j, Y, g:i a'),
                 'created_by'    => $visitorType->createdBy ? $visitorType->createdBy->username : 'N/A',
                 'updated_by'    => $visitorType->updatedBy ? $visitorType->updatedBy->username : 'N/A',
@@ -133,7 +133,7 @@ class VisitorTypeController extends Controller
                             <button class='dropdown-item btn-edit' data-id='{$visitorType->id}'>Edit</button>
                         </li>
                         <li>
-                            <button class='dropdown-item btn-delete' data-id='{$visitorType->id}' data-details='{$visitorType->type_name}'>Delete</button>
+                            <button class='dropdown-item btn-delete' data-id='{$visitorType->id}' data-details='{$visitorType->name}'>Delete</button>
                         </li>
                     </ul>
                 </div>",

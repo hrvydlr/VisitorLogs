@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class RegisteredID extends Model
 {
     use HasFactory, SoftDeletes;
-
+    protected $table = 'registered_ids';
     protected $fillable = [
         'visitor_type',
         'id_number',
@@ -20,7 +20,6 @@ class RegisteredID extends Model
         'deleted_at'
     ];
 
-    protected $table = 'registered_ids';
 
     // Accessor to get full ID like "OJT-001"
     public function getFullIdAttribute()

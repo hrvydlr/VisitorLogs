@@ -10,8 +10,8 @@ class VisitorType extends Model
 {
     use SoftDeletes;
     
-    protected $table    = 'visitor_types';
-    protected $fillable = ['type_name', 'created_by', 'updated_by'];
+    protected $table    = 'visitors_types';
+    protected $fillable = ['name', 'created_by', 'updated_by'];
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');

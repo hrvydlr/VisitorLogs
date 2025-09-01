@@ -9,8 +9,8 @@ class UserType extends Model
 {
     use SoftDeletes;
 
-    protected $table    = 'user_types';
-    protected $fillable = ['type_name', 'created_by', 'updated_by', 'created_at', 'updated_at', 'deleted_at', 'deleted_by'];
+    protected $table    = 'users_types';
+    protected $fillable = ['name', 'created_by', 'updated_by', 'created_at', 'updated_at', 'deleted_at', 'deleted_by'];
 
     public function createdBy()
     {

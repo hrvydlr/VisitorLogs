@@ -42,12 +42,12 @@ class UserTypeController extends Controller
 
         $validator = Validator::make($request->all(), 
             [
-                'type_name'   => [
+                'name'   => [
                     'required',
                     'string',
                     function ($attribute, $value, $fail) use ($request) {
                         $count = UserType::withoutTrashed()
-                                    ->where('type_name', $value)
+                                    ->where('name', $value)
                                     ->where('id', '!=', $request->record_id)
                                     ->count();
                         
@@ -57,12 +57,12 @@ class UserTypeController extends Controller
                     }
                 ]
             ], 
-            ['type_name.unique' => 'Duplicate Entry.']
+            ['name.unique' => 'Duplicate Entry.']
         );
 
         if ($validator->fails()) return response()->json(['errors'=>$validator->errors()]);
         
-        $data = ['type_name' => $request->type_name];
+        $data = ['name' => $request->type_name];
 
         if($request->record_id > 0) 
         {
@@ -90,7 +90,7 @@ class UserTypeController extends Controller
         // return redirect()->route('usertype.index')->with('success', 'Visitor Type deleted successfully!');
         
         $record  = UserType::find($request->id);
-        $details = $record->type_name;
+        $details = $record->name;
         $record->update(['deleted_by' => auth()->id()]);
         $record->delete();
         return response()->json(['You have successfully delete '. $details]);
@@ -110,7 +110,7 @@ class UserTypeController extends Controller
     
         $userTypeQuery = UserType::with('createdBy', 'updatedBy')
             ->when(!empty($keywords) && is_string($keywords), function ($query) use ($keywords) {
-                $query->where('type_name', 'LIKE', "%{$keywords}%")
+                $query->where('name', 'LIKE', "%{$keywords}%")
                 ->orWhere('created_at', 'LIKE', "%{$keywords}%");
 
             });
@@ -128,7 +128,7 @@ class UserTypeController extends Controller
         foreach ($userTypes as $userType) {
             $newData[] = [
                 'id'            => $userType->id,
-                'type_name'     => $userType->type_name,
+                'type_name'     => $userType->name,
                 'created_at'    => Carbon::parse($userType->created_at)->setTimezone('Asia/Manila')->format('F j, Y, g:i a'),
                 'created_by'    => $userType->createdBy ? $userType->createdBy->username : 'N/A',
                 'updated_by'    => $userType->updatedBy ? $userType->updatedBy->username : 'N/A',
@@ -141,7 +141,7 @@ class UserTypeController extends Controller
                             <button class='dropdown-item btn-edit' data-id='{$userType->id}'>Edit</button>
                         </li>
                         <li>
-                            <button class='dropdown-item btn-delete' data-id='{$userType->id}' data-details='{$userType->type_name}'>Delete</button>
+                            <button class='dropdown-item btn-delete' data-id='{$userType->id}' data-details='{$userType->name}'>Delete</button>
                         </li>
                     </ul>
                 </div>",

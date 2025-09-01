@@ -15,19 +15,19 @@ class CreateVisitorsTable extends Migration
             $table->string('last_name')->nullable();
             $table->string('number')->nullable();
             $table->string('address')->nullable();
-            $table->string('visitor_type');
+            $table->integer('visitor_type');
             $table->string('id_number')->nullable();
             $table->string('image_path')->nullable();
             $table->string('image')->nullable(); // Added image column
+            $table->integer('status')->default(0); // Added status column
+            $table->date('visit_date')->nullable();
+            $table->timestamp('time_in')->nullable();
+            $table->timestamp('time_out')->nullable();
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
             $table->foreignId('updated_by')->nullable()->constrained('users')->onDelete('cascade');
-            $table->string('created_at')->nullable();
-            $table->string('updated_at')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             $table->string('deleted_by')->nullable();
-            $table->string('status')->default('active'); // Added status column
-            $table->timestamp('visit_date')->nullable();
-            $table->string('time_in')->nullable();
-            $table->timestamp('time_out')->nullable();
             $table->softDeletes(); // Adds deleted_at column
 
         });

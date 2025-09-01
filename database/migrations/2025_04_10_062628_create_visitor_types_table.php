@@ -8,11 +8,11 @@ class CreateVisitorTypesTable extends Migration
 {
     public function up()
     {
-        Schema::create('visitor_types', function (Blueprint $table) {
+        Schema::create('visitors_types', function (Blueprint $table) {
             $table->id();
-            $table->string('type_name');
-            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('cascade');
-            $table->foreignId('updated_by')->nullable()->constrained('users')->onDelete('cascade');
+            $table->string('name');
+            $table->integer('created_by')->nullable();
+            $table->integer('updated_by')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             $table->softDeletes();
@@ -22,6 +22,6 @@ class CreateVisitorTypesTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('visitor_types');
+        Schema::dropIfExists('visitors_types');
     }
 }

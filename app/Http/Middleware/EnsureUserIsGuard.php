@@ -15,11 +15,8 @@ class EnsureUserIsGuard
     public function handle(Request $request, Closure $next): Response
     {
         $user = Auth::user();
-
-        // Check if user is logged in and has usertype "guard"
-        $typeName = strtolower(optional($user->userType)->type_name);
-        
-        if (!$user || $typeName !== 'guard') {
+     
+        if (!$user || $user->user_type != 3) {
             abort(403, 'Unauthorized access');
         }
 

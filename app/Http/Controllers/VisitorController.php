@@ -17,7 +17,7 @@ class VisitorController extends Controller
     {
         $visitors = Visitor::with('visitorType')->get();
         $visitorTypes = VisitorType::all(); // This line is missing
-        return view('visitors.index', compact('visitors', 'visitorTypes'));
+        return view('visitors.index');
     }
 
      public function save(Request $request)
@@ -199,7 +199,7 @@ class VisitorController extends Controller
                         <button class='dropdown-item btn-timeout' data-id='{$visitor->id}'>Timeout</button>
                     </li>";
             
-                if (Auth::user()->userType->type_name == 'ADMIN')  {
+                if (Auth::user()->userType->name == 'ADMIN')  {
                     $action .= "
                     <li>
                         <button class='dropdown-item btn-delete' data-id='{$visitor->id}' data-details='{$name}'>Delete</button>
@@ -286,7 +286,7 @@ class VisitorController extends Controller
         $visitorType = VisitorType::find($visitorTypeId);
 
         if ($visitorType) {
-            return response()->json(['name' => $visitorType->type_name]);
+            return response()->json(['name' => $visitorType->name]);
         }
 
         return response()->json(['name' => '']);
