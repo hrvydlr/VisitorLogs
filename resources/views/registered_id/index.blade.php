@@ -48,7 +48,7 @@
 
 @push('scripts')
 <script> let default_fields = {!! json_encode(config('constants.crud.registered_id')) !!} 
-    console.log(default_fields);  // Debugging to ensure it's passed correctly
+    
 </script>
 
 @vite(['resources/js/RegisteredId.js'])

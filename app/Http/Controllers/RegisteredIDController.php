@@ -75,7 +75,7 @@ class RegisteredIDController extends Controller
 
         $validator = Validator::make($request->all(), 
             [
-                'visitor_type' => 'required|exists:visitor_types,id',
+                'visitor_type' => 'required|exists:visitors_types,id',
                 'id_number' => [
                     'required',
                     'string',

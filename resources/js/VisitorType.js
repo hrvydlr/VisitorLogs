@@ -5,7 +5,7 @@ let form         = "#visitortypeForm";
 let popContainer = "#visitortypemodal";
 
 $(document).ready(function() {
-
+    
     let columns = []
     $.each(defaultFields, function(index, value){
         columns.push({data: index, width: 'auto', title: value.title})

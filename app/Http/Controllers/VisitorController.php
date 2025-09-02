@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\RegisteredID;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Facades\Validator;
 
 class VisitorController extends Controller
 {
@@ -22,87 +22,78 @@ class VisitorController extends Controller
 
      public function save(Request $request)
     {
-        $validated = $request->validate([
-            'first_name'    => 'required|string|max:255',
-            'middle_name'   => 'nullable|string|max:255',
-            'last_name'     => 'required|string|max:255',
-            'number'        => 'required|string|max:255',
-            'address'       => 'nullable|string|max:255',
-            'image'         => 'nullable|string', // base64 image
-    
-            'id_number'     => [
-                'nullable',
-                'string',
-                function ($attribute, $value, $fail) use ($request) {
-                    if ($value && $request->filled('visitor_type')) {
-                        // Get the type name from the visitor type ID
-                        $typeName = \App\Models\VisitorType::where('id', $request->visitor_type)->value('type_name');
-    
-                        if (!$typeName) {
-                            return $fail('Invalid visitor type selected.');
-                        }
-    
-                        // Check if the ID is registered for this visitor type
-                        $isRegistered = \App\Models\RegisteredID::where('id_number', $value)
-                            ->where('visitor_type', $request->visitor_type) // use the visitor type ID here
-                            ->exists();
-    
-                        if (!$isRegistered) {
-                            return $fail('This ID number is not registered for the selected visitor type.');
-                        }
-    
-                        // Check if the ID is already borrowed (check for active entry with no time_out)
-                        $isBorrowed = \App\Models\Visitor::where('id_number', $value)
-                            ->where('visitor_type', $request->visitor_type) // use the visitor type ID here
-                            ->whereNull('time_out')
-                            ->when($request->filled('id'), function ($query) use ($request) {
-                                $query->where('id', '!=', $request->id); // Exclude the current record if editing
-                            })
-                            ->first();
-    
-                        if ($isBorrowed) {
-                            $borrowerName = trim("{$isBorrowed->first_name} {$isBorrowed->middle_name} {$isBorrowed->last_name}");
-                            return $fail("This ID is currently borrowed by {$borrowerName}.");
-                        }
-                    }
-                },
-            ],
-            'visitor_type'  => 'required|exists:visitor_types,id',
-            'visit_date'    => 'nullable|date',
-            'time_in'       => 'nullable|date_format:H:i',
-            'created_by'    => 'nullable|integer',
+        $record_id =  $request->id;
+        $validator = Validator::make($request->all(),[
+            'first_name'    => 'required',
+            'last_name'     => 'required',
+            'number'        => 'required',
+            'id_number'     => 'required',
+            'visitor_type'  => 'required',
         ]);
-    
-        // Handle image (if provided)
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $isRegistered = RegisteredID::where('id_number', $request->id_number)
+                                ->where('visitor_type', $request->visitor_type)->exists();
+        
+        if (!$isRegistered) {
+            return response()->json(['error' => 'The provided ID number is not registered for the selected visitor type.'], 422);
+        }
+
+        $isBorrowed = Visitor::where('id_number', $request->id_number)
+            ->where('visitor_type', $request->visitor_type)
+            ->whereNull('time_out')
+            ->when($record_id > 0, fn($q) => $q->where('id', '!=', $record_id))
+            ->exists();
+
+        if ($isBorrowed) {
+            return response()->json(['error' => 'This ID number is currently in use and has not been checked out.'], 422);
+        }
+        
+        $userId = Auth::id();
+
+        // Build data to save
+        $data = [
+            'first_name'   => $request->first_name,
+            'middle_name'  => $request->middle_name,
+            'last_name'    => $request->last_name,
+            'number'       => $request->number,
+            'address'      => $request->address,
+            'id_number'    => $request->id_number,
+            'visitor_type' => $request->visitor_type,
+        ];
+
+        // // Handle image (if provided)
         $imageBase64 = $request->input('image');
         if (!empty($imageBase64)) {
-            $validated['image_path'] = $this->storeImage($imageBase64);
+            $data['image_path'] = $this->storeImage($imageBase64);
         }
     
-        $userId = Auth::id();
-    
-        if ($request->filled('id') && $request->input('id') > 0) {
+        if ($record_id > 0) {
             //  Edit Mode
-            $visitor = \App\Models\Visitor::findOrFail($request->input('id'));
-            $validated['updated_by'] = $userId;
+            $visitor = Visitor::findOrFail($record_id);
+            $data['updated_by'] = $userId;
     
             // Keep original visit_date and time_in if not updated
-            $validated['visit_date'] = $validated['visit_date'] ?? $visitor->visit_date;
-            $validated['time_in'] = $validated['time_in'] ?? $visitor->time_in;
+            $data['visit_date'] = $data['visit_date'] ?? $visitor->visit_date;
+            $data['time_in']    = $data['time_in'] ?? $visitor->time_in;
     
-            $visitor->update($validated);
+            $visitor->update($data);
             $message = 'Visitor updated successfully!';
         } else {
             // ➕ Create Mode
-            $validated['visit_date'] = $validated['visit_date'] ?? now()->toDateString();
-            $validated['time_in'] = $validated['time_in'] ?? now()->format('H:i:s');
-            $validated['created_by'] = $userId;
+            $data['visit_date']    =  now()->toDateString();
+            $data['time_in']       =  now();
+            $data['created_by']    = $userId;
     
-            \App\Models\Visitor::create($validated);
+            Visitor::create($data);
             $message = 'Visitor added successfully!';
         }
-    
-        return redirect()->route('visitor.form')->with('success', $message);
+        return response()->json([$message]);
+       
+        // return redirect()->route('visitor.form')->with('success', $message);
     }
     
     private function storeImage($imageData)

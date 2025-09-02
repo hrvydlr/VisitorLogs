@@ -1,142 +1,92 @@
-document.addEventListener('DOMContentLoaded', function () {
-    // Webcam logic (only run if camera exists = we're on the form page)
-    if (document.getElementById('my_camera')) {
-        try {
-            Webcam.set({
-                width: 320,
-                height: 240,
-                image_format: 'jpeg',
-                jpeg_quality: 90
-            });
-            Webcam.attach('#my_camera');
-        } catch (e) {
-            console.error('Webcam initialization failed:', e);
-        }
-    }
+$(document).ready(function() {
 
-    // Event listener for Capture Button
-    const captureBtn = document.getElementById('captureBtn');
-    if (captureBtn) {
-        captureBtn.addEventListener('click', function () {
-            takeSnapshot();
-        });
-    }
+        // ──────────────────────────────────────────────────────────────
+    // Constants
+    // ──────────────────────────────────────────────────────────────
+    const URL_BASE     = "/visitor/";
+    const TABLE_SEL    = "#visitorsTable";
+    const FORM_SEL     = "#visitorsForm";
+    const MODAL_SEL    = "#visitormodal";
+    const CAMERA_SEL   = "#my_camera";
+    const CSRF_TOKEN   = $('meta[name="csrf-token"]').attr('content');
+    
+// ──────────────────────────────────────────────────────────────
+    // Visitor List page (only if table exists)
+    // ──────────────────────────────────────────────────────────────
+    const $table = $(TABLE_SEL);
+    if ($table.length) {
+        // Build columns from default_fields
+        const columns = Object.entries(default_fields).map(([key, val]) => ({
+            data: key,
+            width: 'auto',
+            title: val.title
+        }));
 
-    // Event listener for Recapture Button
-    const recaptureBtn = document.getElementById('recaptureBtn');
-    if (recaptureBtn) {
-        recaptureBtn.addEventListener('click', function () {
-            retakeSnapshot();
-        });
-    }
+        const config = {
+            url: URL_BASE,
+            table: TABLE_SEL,
+            columns,
+            targets: [
+                { targets: [columns.length - 1], className: "text-right" },
+                { targets: [0, 5], className: "text-center" }
+            ]
+        };
 
-    // Global Functions
-    function takeSnapshot() {
-        Webcam.snap(function (data_uri) {
-            const capturedInput = document.getElementById('captured_image');
-            const cameraContainer = document.getElementById('my_camera');
+        // Init table + form wiring
+        common.createTable(TABLE_SEL, config, true);
+        common.setupFormFields(FORM_SEL, 'showModal', MODAL_SEL, URL_BASE, default_fields);
 
-            if (capturedInput && cameraContainer) {
-                capturedInput.value = data_uri;
-                cameraContainer.innerHTML = '<img src="' + data_uri + '" class="img-thumbnail">';
-            }
-        });
-    }
-
-    function retakeSnapshot() {
-        const capturedInput = document.getElementById('captured_image');
-        const cameraContainer = document.getElementById('my_camera');
-
-        if (capturedInput && cameraContainer) {
-            capturedInput.value = '';
-            cameraContainer.innerHTML = '';
-            Webcam.attach('#my_camera');
-        }
-    }
-});
-
-let url = "/visitor/";
-let table = "#visitorsTable";
-let form = "#visitorsForm";
-let popContainer = "#visitormodal";
-
-// Check if the table exists on this page (Visitor List page)
-if (document.querySelector(table)) {
-    let columns = [];
-    $.each(default_fields, function (index, value) {
-        columns.push({ data: index, width: 'auto', title: value.title });
-    });
-
-    let config = {
-        url: url,
-        table: table,
-        columns: columns,
-        targets: [
-            { targets: [columns.length - 1], className: "text-right" },
-            { targets: [0, 5], className: "text-center" }
-        ]
-    };
-
-    $(document).ready(function () {
-        common.createTable(table, config, true);
-        common.setupFormFields(form, 'showModal', popContainer, url, default_fields);
-
-        $("#btn-addUsers").on('click', () => {
-            common.clearForm(form);
-            common.showModal(popContainer);
+        // Add Visitor
+        $('#btn-addUsers').on('click', () => {
+            common.clearForm(FORM_SEL);
+            common.showModal(MODAL_SEL);
         });
 
-        $(form).on('submit', function (e) {
-            e.preventDefault();
-            common.saveForm(url + 'save', table, form, new FormData(this), config);
-        });
 
+        // Timeout visitor (delegated)
         $(document).on('click', '.btn-timeout', function () {
-            let id = $(this).data('id');
-            if (confirm('Are you sure you want to timeout this visitor?')) {
+            const id = $(this).data('id');
+            if (!id) return;
+            if (window.confirm('Are you sure you want to timeout this visitor?')) {
                 $.ajax({
-                    url: url + `setTimeout/${id}`,
+                    url: `${URL_BASE}setTimeout/${id}`,
                     type: 'POST',
-                    data: {
-                        _token: $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function (res) {
+                    data: { _token: CSRF_TOKEN },
+                    success: (res) => {
                         alert(res.message);
-                        $(table).DataTable().ajax.reload(null, false);
+                        $table.DataTable().ajax.reload(null, false);
                     },
-                    error: function () {
-                        alert('Something went wrong!');
-                    }
+                    error: () => alert('Something went wrong!')
                 });
             }
         });
 
+        // View details (delegated)
         $(document).on('click', '.btn-view', function () {
-            let visitorId = $(this).data('id');
+            const visitorId = $(this).data('id');
+            if (!visitorId) return;
+
             $.ajax({
-                url: url + 'show/' + visitorId,
+                url: `${URL_BASE}show/${visitorId}`,
                 method: 'GET',
-                success: function (response) {
-                    let detailsHtml = `
-                        <p><strong>Name:</strong> ${response.first_name} ${response.middle_name} ${response.last_name}</p>
-                        <p><strong>Number:</strong> ${response.number}</p>
-                        <p><strong>Address:</strong> ${response.address}</p>
-                        <p><strong>ID Number:</strong> ${response.id_number}</p>
-                        <p><strong>Visit Date:</strong> ${response.visit_date}</p>
-                        <p><strong>Time In:</strong> ${response.time_in}</p>
-                        <p><strong>Status:</strong> ${response.time_out ? 'Timed Out' : 'Active'}</p>
+                success: (r) => {
+                    const detailsHtml = `
+                        <p><strong>Name:</strong> ${r.first_name} ${r.middle_name ?? ''} ${r.last_name}</p>
+                        <p><strong>Number:</strong> ${r.number ?? ''}</p>
+                        <p><strong>Address:</strong> ${r.address ?? ''}</p>
+                        <p><strong>ID Number:</strong> ${r.id_number ?? ''}</p>
+                        <p><strong>Visit Date:</strong> ${r.visit_date ?? ''}</p>
+                        <p><strong>Time In:</strong> ${r.time_in ?? ''}</p>
+                        <p><strong>Status:</strong> ${r.time_out ? 'Timed Out' : 'Active'}</p>
                     `;
-                    $('#visitormodal .modal-body').html(detailsHtml);
-                    common.showModal(popContainer);
+                    $(`${MODAL_SEL} .modal-body`).html(detailsHtml);
+                    common.showModal(MODAL_SEL);
                 },
-                error: function () {
-                    alert('Error fetching visitor details.');
-                }
+                error: () => alert('Error fetching visitor details.')
             });
         });
-    });
-}
+    }
 
-// Webcam logic (only run if camera exists = we're on the form page)
+});
 
-
+    

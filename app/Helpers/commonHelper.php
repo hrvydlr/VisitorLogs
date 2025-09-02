@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\User;
-
+use App\Models\VisitorType;
 //PAGE NAME
 if (!function_exists("page_name")) {
     function page_name($name)
@@ -52,5 +52,11 @@ if(!function_exists("name")){
     function name($id){
         $user = User::find($id);
         return $user ? $user->first_name .' ' . $user->last_name : 'Unknown User';
+    }
+}
+
+if(!function_exists("visitor_types")){
+    function visitor_types(){
+        return VisitorType::withoutTrashed()->get();
     }
 }

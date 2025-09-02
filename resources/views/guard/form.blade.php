@@ -34,7 +34,7 @@
                                     <option value="" disabled selected>Select Visitor Type</option>
                                     @foreach($visitorTypes as $type)
                                         <option value="{{ $type->id }}" {{ old('visitor_type', $visitor->visitor_type_id ?? '') == $type->id ? 'selected' : '' }}>
-                                            {{ $type->type_name }}
+                                            {{ $type->name }}
                                         </option>
                                     @endforeach
                                 </select>
