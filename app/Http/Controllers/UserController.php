@@ -16,10 +16,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::with('userType')->get(); // Eager load userType
-        $userTypes = UserType::all();
-
-        return view('users.index', compact('users', 'userTypes'));
+        return view('users.index');
     }
 
     public function save(Request $request)
@@ -33,7 +30,7 @@ class UserController extends Controller
                 'string',
                 Rule::unique('users', 'username')->ignore($recordId, 'id'),
             ],
-            'user_type' => 'required|exists:user_types,id',
+            'user_type' => 'required',
             'password'  => $recordId ? 'nullable|string' : 'required|string',
         ]);
     
@@ -60,19 +57,12 @@ class UserController extends Controller
         } else {
             // CREATE
             $data['created_by'] = $userId;
-            $data['remember_token'] = \Str::random(60);
             User::create($data);
             $action = 'created';
         }
     
         return response()->json([ "User successfully {$action}: {$request->username}",
         ]);
-    }
-
-    public function show($id)
-    {
-        $user = User::findOrFail($id);
-        return response()->json($user);
     }
 
     public function list(Request $request)
@@ -85,12 +75,8 @@ class UserController extends Controller
     
         $columns = ['id', 'username', 'user_type_name', 'created_at', 'updated_at'];
     
-        $usersQuery = User::select('users.*', 'user_types.type_name as user_type_name')
-            ->leftJoin('user_types', 'users.user_type', '=', 'user_types.id')
-            ->when(!empty($keywords) && is_string($keywords), function ($query) use ($keywords) {
-                $query->where('username', 'LIKE', "%{$keywords}%")
-                      ->orWhere('user_types.type_name', 'LIKE', "%{$keywords}%")
-                      ->orWhere('users.created_at', 'LIKE', "%{$keywords}%");
+        $usersQuery = User::when(!empty($keywords) && is_string($keywords), function ($query) use ($keywords) {
+                $query->where('username', 'LIKE', "%{$keywords}%");
             });
     
         $filteredQuery = clone $usersQuery;
@@ -101,33 +87,19 @@ class UserController extends Controller
             ->limit($limit)
             ->get();
         
-    
-    
         $newData = [];
         foreach ($users as $user) {
             $newData[] = [
                 'id'                => $user->id,
                 'username'          => $user->username,
-                'user_type'         => $user->userType ? $user->userType->type_name : '',
+                'user_type'         => $user->userType ? $user->userType->name : '',
                 'remember_token'    => $user->remember_token,
-                'created_by'        => $this->getUserName($user->created_by),
-                'updated_by'        => $this->getUserName($user->updated_by),
+                'created_by'        => name($user->created_by),
+                'updated_by'        => name($user->updated_by),
                 'created_at'        => Carbon::parse($user->created_at)->setTimezone('Asia/Manila')->format('F j, Y, g:i a'),
                 'updated_at'        => Carbon::parse($user->updated_at)->setTimezone('Asia/Manila')->format('F j, Y, g:i a'),
-                'action' => "
-                <div class='dropdown'>
-                    <button class='btn btn-sm border-0 bg-transparent text-dark' type='button' id='actionDropdown{$user->id}' data-bs-toggle='dropdown' aria-expanded='false'>
-                        &#8942; <!-- Unicode for vertical ellipsis -->
-                    </button>
-                    <ul class='dropdown-menu' aria-labelledby='actionDropdown{$user->id}'>
-                        <li>
-                            <button class='dropdown-item btn-edit' data-id='{$user->id}'>Edit</button>
-                        </li>
-                        <li>
-                            <button class='dropdown-item btn-delete' data-id='{$user->id}' data-details='{$user->username}'>Delete</button>
-                        </li>
-                    </ul>
-                </div>",];
+                'action'            => create_action($user->id,$user->username,'Edit')
+            ];
         }
     
         return response()->json([
@@ -157,9 +129,4 @@ class UserController extends Controller
         return response()->json(['You have successfully deleted ' . $details]);
     }
 
-    private function getUserName($userId)
-    {
-        $user = User::find($userId);
-        return $user ? $user->username : 'Unknown User';
-    }
 }

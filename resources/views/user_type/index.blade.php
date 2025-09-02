@@ -28,7 +28,7 @@
     'modal_id'      => 'usertypemodal',
     'modal_size'    => '',
     'form_title'    => 'Register User Type',
-    'form_content'  => view('user_type.form',compact('userTypes'))->render()
+    'form_content'  => view('user_type.form')->render()
 ])
 @endsection
 

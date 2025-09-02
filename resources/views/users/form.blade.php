@@ -3,23 +3,17 @@
         <div class="px-5 pt-2 pb-0">
             <div class="notification-container"></div>
 
-            <input type="hidden" name="record_id" id="record_id" value="{{ $users->id ?? '' }}">
+            <input type="hidden" name="record_id" id="record_id" >
             
             <div class="mb-3">
                 <label for="user_type_id" class="label">Role</label>
                 <select name="user_type" id="user_type" class="form-control select2" required>
-                    <option value="">-- Select Role --</option>
-                    @foreach($userTypes as $type)
-                        <option value="{{ $type->id }}">{{ $type->type_name }}</option>
-                    @endforeach
                 </select>
             </div>
 
             <div class="mb-3">
                 <label for="Username" class="label">Employee Code</label>
-                <input type="text" name="username" id="username" class="form-control" required 
-    value="{{ old('username', $users->username ?? '') }}" 
-    @if(isset($users)) disabled @endif>
+                <input type="text" name="username" id="username" class="form-control" required >
 
             </div>
         

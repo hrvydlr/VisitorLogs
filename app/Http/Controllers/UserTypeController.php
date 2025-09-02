@@ -19,20 +19,7 @@ class UserTypeController extends Controller
 {
     public function index()
     {
-        $userTypes = UserType::all();
-        return view('user_type.index', compact('userTypes'));
-    }
-
-    // Show the form for creating a new visitor type or editing an existing one
-    public function show($id = null)
-    {
-        $userType = null;
-        if ($id) {
-            // Find the visitor type by ID for editing
-            $userType = userType::findOrFail($id);
-        }
-
-        return view('user_type.index', compact('userType'));
+        return view('user_type.index');
     }
 
     // Save the visitor type (either create or update)
@@ -62,7 +49,7 @@ class UserTypeController extends Controller
 
         if ($validator->fails()) return response()->json(['errors'=>$validator->errors()]);
         
-        $data = ['name' => $request->type_name];
+        $data = ['name' => $request->name];
 
         if($request->record_id > 0) 
         {
@@ -79,7 +66,7 @@ class UserTypeController extends Controller
             $record             = UserType::create($data);
         }
 
-        return response()->json(['You have successfully '. $type .' '. $request->type_name]);
+        return response()->json(['You have successfully '. $type .' '. $request->name]);
     }
 
     // Delete a visitor type
@@ -100,13 +87,12 @@ class UserTypeController extends Controller
     public function list(Request $request)
     {
         
-   
-        $keywords = request()->input('search.value');
-        $limit = request()->input('length');
-        $start = request()->input('start');
-        $orderColumnIndex = request()->input('order.0.column');
-        $orderDir = request()->input('order.0.dir');
-        $columns = ['id', 'type', 'created_at', 'created_by', 'updated_at', 'updated_by'];
+        $keywords           = request()->input('search.value');
+        $limit              = request()->input('length');
+        $start              = request()->input('start');
+        $orderColumnIndex   = request()->input('order.0.column');
+        $orderDir           = request()->input('order.0.dir');
+        $columns            = ['id', 'name', 'created_at', 'created_by', 'updated_at', 'updated_by'];
     
         $userTypeQuery = UserType::with('createdBy', 'updatedBy')
             ->when(!empty($keywords) && is_string($keywords), function ($query) use ($keywords) {
@@ -115,44 +101,32 @@ class UserTypeController extends Controller
 
             });
     
-        $filteredQuery = clone $userTypeQuery;
+        $filteredQuery  = clone $userTypeQuery; 
+        $totalRecords   = $filteredQuery->count();
     
-        $totalRecords = $filteredQuery->count();
+        $userTypes      = $userTypeQuery->orderBy($columns[$orderColumnIndex], $orderDir)
+                            ->offset($start)
+                            ->limit($limit)
+                            ->get();
     
-        $userTypes = $userTypeQuery->orderBy($columns[$orderColumnIndex], $orderDir)
-            ->offset($start)
-            ->limit($limit)
-            ->get();
-    
-        $newData = [];
+        $newData        = [];
+
         foreach ($userTypes as $userType) {
             $newData[] = [
                 'id'            => $userType->id,
-                'type_name'     => $userType->name,
-                'created_at'    => Carbon::parse($userType->created_at)->setTimezone('Asia/Manila')->format('F j, Y, g:i a'),
-                'created_by'    => $userType->createdBy ? $userType->createdBy->username : 'N/A',
-                'updated_by'    => $userType->updatedBy ? $userType->updatedBy->username : 'N/A',
-                'action'        => "<div class='dropdown'>
-                    <button class='btn btn-sm border-0 bg-transparent text-dark' type='button' id='actionDropdown{$userType->id}' data-bs-toggle='dropdown' aria-expanded='false'>
-                        &#8942; <!-- Unicode for vertical ellipsis -->
-                    </button>
-                    <ul class='dropdown-menu' aria-labelledby='actionDropdown{$userType->id}'>
-                        <li>
-                            <button class='dropdown-item btn-edit' data-id='{$userType->id}'>Edit</button>
-                        </li>
-                        <li>
-                            <button class='dropdown-item btn-delete' data-id='{$userType->id}' data-details='{$userType->name}'>Delete</button>
-                        </li>
-                    </ul>
-                </div>",
+                'name'          => $userType->name,
+                'created_at'    => Carbon::parse($userType->created_at)->format('F j, Y, g:i a'),
+                'created_by'    => name($userType->created_by),
+                'updated_by'    => name($userType->updated_by),
+                'action'        => create_action($userType->id, $userType->name, "Edit")
             ];
         }
 
         return response()->json([
-            'draw' => intval(request()->input('draw')),
-            'recordsTotal' => UserType::count(),
-            'recordsFiltered' => $totalRecords,
-            'data' => $newData
+            'draw'              => intval(request()->input('draw')),
+            'recordsTotal'      => UserType::count(),
+            'recordsFiltered'   => $totalRecords,
+            'data'              => $newData
 
         ]);
     }

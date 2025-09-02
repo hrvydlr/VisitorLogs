@@ -40,7 +40,7 @@
     'modal_id'      => 'addIDModal',
     'modal_size'    => '',
     'form_title'    => 'Register ID',
-    'form_content'  => view('registered_id.form', compact('visitorTypes', 'registeredIDs'))->render()
+    'form_content'  => view('registered_id.form')->render()
 ])
 
 @endsection

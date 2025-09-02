@@ -12,9 +12,9 @@
                         Select Visitor Type
                     </option>
                 
-                    @foreach ($visitorTypes as $type)
+                    {{-- @foreach ($visitorTypes as $type)
                         <option value="{{ $type->id}}">{{ $type->type_name }}</option>
-                    @endforeach
+                    @endforeach --}}
                 </select>
                 
                 

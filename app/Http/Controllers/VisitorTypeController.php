@@ -56,7 +56,7 @@ class VisitorTypeController extends Controller
 
         if ($validator->fails()) return response()->json(['errors'=>$validator->errors()]);
         
-        $data = ['name' => $request->type_name];
+        $data = ['name' => $request->name];
 
         if($request->record_id > 0) 
         {
@@ -73,7 +73,7 @@ class VisitorTypeController extends Controller
             $record             = VisitorType::create($data);
         }
 
-        return response()->json(['You have successfully '. $type .' '. $request->type_name]);
+        return response()->json(['You have successfully '. $type .' '. $request->name]);
     }
 
     // Delete a visitor type
@@ -119,24 +119,11 @@ class VisitorTypeController extends Controller
         foreach ($visitorTypes as $visitorType) {
             $newData[] = [
                 'id'            => $visitorType->id,
-                'type_name'     => $visitorType->name,
+                'name'          => $visitorType->name,
                 'created_at'    => Carbon::parse($visitorType->created_at)->setTimezone('Asia/Manila')->format('F j, Y, g:i a'),
-                'created_by'    => $visitorType->createdBy ? $visitorType->createdBy->username : 'N/A',
-                'updated_by'    => $visitorType->updatedBy ? $visitorType->updatedBy->username : 'N/A',
-                'action' => "
-                <div class='dropdown'>
-                    <button class='btn btn-sm border-0 bg-transparent text-dark' type='button' id='actionDropdown{$visitorType->id}' data-bs-toggle='dropdown' aria-expanded='false'>
-                        &#8942; <!-- Unicode for vertical ellipsis -->
-                    </button>
-                    <ul class='dropdown-menu' aria-labelledby='actionDropdown{$visitorType->id}'>
-                        <li>
-                            <button class='dropdown-item btn-edit' data-id='{$visitorType->id}'>Edit</button>
-                        </li>
-                        <li>
-                            <button class='dropdown-item btn-delete' data-id='{$visitorType->id}' data-details='{$visitorType->name}'>Delete</button>
-                        </li>
-                    </ul>
-                </div>",
+                'created_by'    => name($visitorType->created_by),
+                'updated_by'    => name($visitorType->updated_by),
+                'action'        => create_action($visitorType->id, $visitorType->name, 'Edit') 
             ];
         }
 

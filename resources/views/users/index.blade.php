@@ -130,7 +130,7 @@
     'modal_id'     => 'usermodal',
     'modal_size'   => '',
     'form_title'   => 'Add Users',
-    'form_content' => view('users.form', compact('userTypes'))->render()
+    'form_content' => view('users.form')->render()
 ])
 
 @endsection

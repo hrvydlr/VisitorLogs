@@ -8,7 +8,7 @@ return [
                 'in_form'   => 1, // 0 = No, 1 = yes
                 'title'     => 'ID'
             ],
-            'type_name'     => [
+            'name'     => [
                 'in_form'   => 1, // 0 = No, 1 = yes
                 'title'     => 'Name'
             ],
@@ -34,7 +34,7 @@ return [
                 'in_form'   => 1, // 0 = No, 1 = yes
                 'title'     => 'ID'
             ],
-            'type_name'     => [
+            'name'     => [
                 'in_form'   => 1, // 0 = No, 1 = yes
                 'title'     => 'Name'
             ],

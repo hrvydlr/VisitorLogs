@@ -21,9 +21,7 @@ class RegisteredIDController extends Controller
 {
     public function index(Request $request)
     {
-        $registeredIDs = RegisteredID::with('createdBy')->get();
-        $visitorTypes = VisitorType::all();
-         return view('registered_id.index', compact('registeredIDs','visitorTypes'));
+         return view('registered_id.index');
            
     }
     public function list(Request $request)
@@ -57,24 +55,10 @@ class RegisteredIDController extends Controller
                 'id_number'      =>  $registeredID->id_number,
                 'visitor_type'   => $registeredID->visitorType ? $registeredID->visitorType->type_name : 'N/A',
                 'created_at'     => Carbon::parse($registeredID->created_at)->setTimezone('Asia/Manila')->format('F j, Y, g:i a'),
-                'created_by'     => $registeredID->createdBy ? $registeredID->createdBy->username : 'N/A',
+                'created_by'     => name($registeredID->created_by),
                 'updated_at'     => Carbon::parse($registeredID->updated_at)->setTimezone('Asia/Manila')->format('F j, Y, g:i a'),
-                'updated_by'     => $registeredID->updatedBy ? $registeredID->updatedBy->username : 'N/A',
-                'updater'        => $registeredID->updatedBy ? $registeredID->updatedBy->username : '', // Ensure you get the updater's name if possible
-                'action'         => "
-                                    <div class='dropdown'>
-                                        <button class='btn btn-sm border-0 bg-transparent text-dark' type='button' id='actionDropdown{$registeredID->id}' data-bs-toggle='dropdown' aria-expanded='false'>
-                                            &#8942; <!-- Unicode for vertical ellipsis -->
-                                        </button>
-                                        <ul class='dropdown-menu' aria-labelledby='actionDropdown{$registeredID->id}'>
-                                            <li>
-                                                <button class='dropdown-item btn-edit' data-id='{$registeredID->id}'>Edit</button>
-                                            </li>
-                                            <li>
-                                                <button class='dropdown-item btn-delete' data-id='{$registeredID->id}' data-details='{$registeredID->type_name}'>Delete</button>
-                                            </li>
-                                        </ul>
-                                    </div>",
+                'updated_by'     => name($registeredID->updated_by), // Ensure you get the updater's name if possible
+                'action'         => create_action($registeredID->id, $registeredID->id_number, 'Edit')
             ];
         }
     
