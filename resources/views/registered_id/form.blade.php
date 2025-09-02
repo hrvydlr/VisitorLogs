@@ -8,17 +8,11 @@
 
             <div class="form-group">
                 <select name="visitor_type" id="visitor_type" class="form-control mt-3" required>
-                    <option value="" disabled selected>
-                        Select Visitor Type
-                    </option>
-                
-                    {{-- @foreach ($visitorTypes as $type)
-                        <option value="{{ $type->id}}">{{ $type->type_name }}</option>
-                    @endforeach --}}
+
                 </select>
                 
                 
-                <span class="error-span error-type_name text-danger"></span>
+                <span class="error-span error-name text-danger"></span>
             </div>
 
             <div class="form-group">

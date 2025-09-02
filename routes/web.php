@@ -12,6 +12,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserTypeController;
 use App\Http\Controllers\VisitorTypeController;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\CommonController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -101,5 +102,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/show/{id}', [ReportsController::class, 'show'])->name('reports.show');
         Route::post('/search', [ReportsController::class, 'search'])->name('reports.search');
         Route::post('/delete', [ReportsController::class, 'delete'])->name('reports.delete');
+    });
+
+    Route::group(['prefix' => 'common'], function () {
+        Route::post('/visitor_types', [CommonController::class, 'visitor_types'])->name('common.visitor_types');
     });
 });

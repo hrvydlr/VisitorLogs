@@ -23,10 +23,9 @@ $(document).ready(function(){
 
     // Create Table
     common.createTable(table, config, true)
-
     // Set Local Storage for Edit Form
     common.setupFormFields(form, 'showModal', popContainer, url, defaultFields)
-
+    common.createDropdown('/common/visitor_types', '#visitor_type', null, popContainer)
     // Show Add Modal
     $("#btn-addID").on('click', () => {
         common.clearForm(form)

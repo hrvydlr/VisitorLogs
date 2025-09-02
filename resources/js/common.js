@@ -299,22 +299,74 @@ class Common {
         $(formid + ' .error-' + index).html('<i class="bi bi-exclamation-circle-fill"></i> ' + value);
     }
 
+    // createDropdown(url, element_id, data = null, popContainer_id = "") {
+    //     var records = $.ajax({
+    //         url: window.location.origin + url,
+    //         type: "POST",
+    //         async: false,
+    //         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+    //         data: data,
+    //         success: function (data) { return data; },
+    //     }).responseJSON;
+
+    //     console.log('disposition', records)
+
+    //     $(element_id).empty();
+
+    //     popContainer_id ? $(element_id).select2({ data: records, dropdownParent: $(popContainer_id), width: '100%' })
+    //         : $(element_id).select2({ data: records });
+    // }
+
     createDropdown(url, element_id, data = null, popContainer_id = "") {
+
         var records = $.ajax({
-            url: window.location.origin + url,
-            type: "POST",
-            async: false,
-            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-            data: data,
-            success: function (data) { return data; },
-        }).responseJSON;
+               url: window.location.origin + url,
+               type: "POST",
+               async: false,
+               headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+               data: data,
+               success: function (data) { return data; },
+           }).responseJSON || [];
+       
+           console.log('disposition', records);
+       
+           var $el = $(element_id);
+       
+           // If Select2 was previously applied, destroy it so it becomes native again
+           if ($el.data && $el.data('select2')) {
+               try { $el.select2('destroy'); } catch (e) {}
+           }
+       
+           // Build native options
+           $el.empty();
+           $el.append($('<option>', { value: '', text: '— Select —' })); // optional placeholder
+       
+           // Helper to append a single option
+           function appendOption($parent, item) {
+               var value, label;
 
-        console.log('disposition', records)
-
-        $(element_id).empty();
-
-        popContainer_id ? $(element_id).select2({ data: records, dropdownParent: $(popContainer_id), width: '100%' })
-            : $(element_id).select2({ data: records });
+               if (item && typeof item === 'object') {
+                   value = ('id' in item) ? item.id : (('value' in item) ? item.value : '');
+                   label = ('text' in item) ? item.text : (('label' in item) ? item.label : String(value));
+               } else {
+                   value = item;
+                   label = String(item ?? '');
+               }
+           
+               $parent.append($('<option>', { value: value, text: label }));
+           }
+       
+           // Support both flat arrays and select2-style groups {text, children:[...]}
+           records.forEach(function (item) {
+               if (item && Array.isArray(item.children)) {
+                   var groupLabel = item.text || item.label || '';
+                   var $grp = $('<optgroup>', { label: groupLabel });
+                   item.children.forEach(function (child) { appendOption($grp, child); });
+                   $el.append($grp);
+               } else {
+                   appendOption($el, item);
+               }
+           });
     }
     
     // Create Storage

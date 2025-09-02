@@ -1,6 +1,6 @@
-@extends('layouts.visitorlog')
-
-@section('content')
+<!DOCTYPE html>
+<html lang="en">
+@include('layouts.head')
 <body id="visitor-log">
     <div id="visitorLog-container">
         <div class="header"></div>
@@ -11,30 +11,22 @@
         </div>
 
         <div class="form">
-            <form class="row m-3 gap-3" id="visitorsForm" action="{{ route('visitor.save') }}" method="POST">
-                @csrf
+            <form class="row m-3 gap-3" id="visitorsForm">
                 <div class="form-fields">
                     <div class="col-12">
                         <div class="row">
                             <div class="col-md-6 mb-4">
-                            
-                            <input type="text" name="id_number" id="id_number" placeholder="ID Number"class="form-control rounded-pill p-3" required minlength="3" maxlength="4" value="{{ old('id_number', $visitor->id_number ?? '') }}">
-                                @error('id_number')
-                                    <div class="text-danger text-sm mt-1">{{ $message }}</div>
-                                @enderror
-                                @if(session()->has('danger'))
-                                    <p class="text-danger">{{ session('danger') }}</p> 
-                                @endif
+                            <input type="text" name="id_number" id="id_number" placeholder="ID Number"class="form-control rounded-pill p-3" required minlength="3" maxlength="4">
                             </div>
 
-                            <input type="hidden" name="id" value="{{ old('id', $visitor->id ?? '') }}">
+                            <input type="hidden" name="id">
 
                             <div class="col-md-6 mb-4">
                                 <select name="visitor_type" id="visitor_type" class="form-control rounded-pill w-100 p-3">
                                     <option value="" disabled selected>Select Visitor Type</option>
                                     @foreach($visitorTypes as $type)
                                         <option value="{{ $type->id }}" {{ old('visitor_type', $visitor->visitor_type_id ?? '') == $type->id ? 'selected' : '' }}>
-                                            {{ $type->type_name }}
+                                            {{ $type->name }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -43,23 +35,23 @@
                     </div>
 
                         <div class="col-12 mb-4">
-                            <input type="text" id="fname" name="first_name" class="form-control rounded-pill p-3" placeholder="First Name" value="{{ old('first_name', $visitor->first_name ?? '') }}" required>
+                            <input type="text" id="fname" name="first_name" class="form-control rounded-pill p-3" placeholder="First Name">
                         </div>
 
                         <div class="col-12 mb-4">
-                            <input type="text" id="mname" name="middle_name" class="form-control rounded-pill p-3" placeholder="Middle Name" value="{{ old('middle_name', $visitor->middle_name ?? '') }}">
+                            <input type="text" id="mname" name="middle_name" class="form-control rounded-pill p-3" placeholder="Middle Name">
                         </div>
 
                         <div class="col-12 mb-4">
-                            <input type="text" id="lname" name="last_name" class="form-control rounded-pill p-3" placeholder="Last Name" value="{{ old('last_name', $visitor->last_name ?? '') }}" required>
+                            <input type="text" id="lname" name="last_name" class="form-control rounded-pill p-3" placeholder="Last Name">
                         </div>
 
                         <div class="col-12 mb-4">
-                            <input type="text" id="address" name="address" class="form-control rounded-pill p-3" placeholder="Address Name" value="{{ old('address', $visitor->address ?? '') }}">
+                            <input type="text" id="address" name="address" class="form-control rounded-pill p-3" placeholder="Address Name">
                         </div>
 
                         <div class="col-12 mb-5">
-                            <input type="text" id="number" name="number" class="form-control rounded-pill p-3" placeholder="Contact Number" value="{{ old('number', $visitor->number ?? '') }}" required>
+                            <input type="text" id="number" name="number" class="form-control rounded-pill p-3" placeholder="Contact Number">
                         </div>
                 </div>
 
@@ -76,18 +68,14 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary rounded-pill p-3 save-button">
-                    {{ isset($visitor) ? 'Update' : 'Save' }}
-                </button>
+                <button type="submit" class="btn btn-primary rounded-pill p-3 save-button">Save</button>
             </form>
-
-            
         </div>
     </div>
 </body>
-@endsection
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
-
 <!-- External JS file inclusion -->
-@vite(['resources/js/Visitors.js'])
+@vite(['resources/js/VisitorsForm.js'])
+</html>
