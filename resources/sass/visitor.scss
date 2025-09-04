@@ -1,19 +1,47 @@
+   #btn-addUsers{
+            position: relative; 
+            right: 25px; 
+            padding: 12px;
+   }
+
+   
    .card {
-            margin: auto;
+            width: 120%; 
+            position : relative; 
+            bottom: 30px;
             overflow-x: hidden; /* Optional, helps avoid scrollbars inside card */
-            background-color:red
-            
         }
 
+    .log {
+            position: relative; 
+            bottom: 50px; 
+            left: 8px;
+    }
+
+        #visitorsTable th,
+        #visitorsTable td {
+            border-left: none !important;
+            border-right: none !important;
+        }
+
+        #visitorsTable thead th {
+            vertical-align: middle !important;
+        }
+
+        #visitorsTable tbody tr:hover td {
+            background-color: #0000001e !important;
+        }
+        
+
         @media screen and (min-width: 400px) and (max-width: 5760px){
-            .card {
+            .card{
                 width: 100%!important;
                 height: 50%!important;
             }
             
 
             @media screen and (min-width: 580px) {
-            .card {
+            .card-header {
                 position: relative;
                 width: 105%!important;
                 height: 50%!important;

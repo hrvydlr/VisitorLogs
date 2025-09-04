@@ -8,7 +8,7 @@
     @endif
 
         <div class="test">
-            <!-- Right Side Of Navbar -->
+        <img src="/images/Magellan_pure_white_logo.png" alt="logo" class="logo">
             <ul class="navbar-nav me-auto"></ul>
             <ul class="navbar-nav ms-auto">
                 <!-- Authentication Links -->
@@ -31,7 +31,7 @@
                                 {{ __('Logout') }}
                             </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none" style="z-index:10!important;">
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
                         </div>
