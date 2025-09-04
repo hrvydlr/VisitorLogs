@@ -1,0 +1,938 @@
+/* Pro-level Design for User Types Page - Fixed Table */
+
+// Define a professional color palette using SASS variables
+$primary-color: #1a59ac ;
+$background-color: #f3f4f6;
+$card-bg: #ffffff;
+$text-color: #1f2937;
+$heading-color: #111827;
+$shadow-light: rgba(0, 0, 0, 0.05);
+$shadow-dark: rgba(0, 0, 0, 0.1);
+$secondary-text: #6b7280;
+
+// Universal box-sizing for better layout consistency
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    background: $background-color;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: $text-color;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+// User types container
+.user-types-container {
+    padding: 2rem;
+    padding-left: 300px;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+// Page header with stats
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.header-content {
+    h2.page-title {
+        color: $heading-color;
+        font-weight: 600;
+        font-size: 2.25rem;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+    }
+    .title-icon {
+        font-size: 2rem;
+        margin-right: 1rem;
+        color: $primary-color;
+    }
+    .page-subtitle {
+        font-size: 1rem;
+        color: $secondary-text;
+    }
+}
+
+.header-stats {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.stat-card {
+    background: $card-bg;
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px $shadow-light, 0 2px 4px -1px $shadow-light;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 15px -3px $shadow-light, 0 4px 6px -2px $shadow-dark;
+    }
+    
+    // Animation for stat updates
+    &.stat-updated {
+        background-color: lighten($primary-color, 45%);
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px -3px rgba($primary-color, 0.3);
+    }
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a59ac;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: $secondary-text;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.25rem;
+}
+
+// Table card
+.table-card {
+    background-color: $card-bg !important;
+    border-radius: 1rem !important;
+    box-shadow: 0 10px 15px -3px $shadow-light, 0 4px 6px -2px $shadow-light !important;
+    padding: 2rem;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    box-sizing: border-box;
+    border: none !important;
+}
+
+.table-container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+.header-left {
+    .card-title {
+        color: $heading-color;
+        font-weight: 600;
+        font-size: 1.5rem;
+        margin-bottom: 0.25rem;
+    }
+    .entries-info {
+        font-size: 0.875rem;
+        color: $secondary-text;
+    }
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.entries-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+
+    .form-select {
+        width: 70px;
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+        border: 1px solid #d1d5db;
+        background: white;
+    }
+}
+
+.search-container {
+    .search-wrapper {
+        position: relative;
+        .search-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+        }
+        .search-input {
+            padding-left: 2.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid #d1d5db;
+            background: white;
+        }
+    }
+}
+
+.search-input {
+    min-width: 140px;
+    max-width: 180px;
+}
+
+// FIXED TABLE STYLING - This is the main fix for your td elements
+.modern-table,
+#userType,
+table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 0 !important;
+    background: white !important;
+
+    // Header styling
+    thead {
+        th {
+            background-color: #1a59ac!important;
+            color: #ffffff !important;
+            font-weight: 700 !important;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 1rem !important;
+            text-align: left !important;
+            border: none !important;
+            font-size: 0.875rem;
+        }
+    }
+
+    // Body styling - MAIN FIX FOR TD
+    tbody {
+        tr {
+            background-color: #ffffff !important;
+            transition: background-color 0.2s ease;
+            border: none !important;
+
+            // Alternating row colors
+            &:nth-child(odd) {
+                background-color: #f8fafc !important;
+            }
+
+            &:nth-child(even) {
+                background-color: #ffffff !important;
+            }
+
+            // Hover effect
+            &:hover {
+                background-color: #f1f5f9 !important;
+                transform: translateY(-1px);
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            }
+
+            // TD STYLING - This fixes your table cells
+            td {
+                padding: 1rem !important;
+                border-bottom: 1px solid #e2e8f0 !important;
+                border-top: none !important;
+                border-left: none !important;
+                border-right: none !important;
+                color: #374151 !important;
+                font-size: 0.9rem;
+                vertical-align: middle !important;
+                height: auto !important;
+                min-height: 50px;
+                
+                // Make text look better
+                font-weight: 500;
+                line-height: 1.4;
+                
+                // First column (ID) - make it smaller and centered
+                &:first-child {
+                    width: 60px;
+                    text-align: center;
+                    font-weight: 600;
+                    color: $primary-color;
+                }
+                
+                // Last column (Actions) - center align
+                &:last-child {
+                    text-align: center;
+                    width: 80px;
+                }
+                
+                // Name column - make it bold
+                &:nth-child(2) {
+                    font-weight: 600;
+                    color: $heading-color;
+                }
+            }
+        }
+    }
+}
+
+// DataTables override (if you're using DataTables)
+.dataTables_wrapper {
+    .dataTables_length,
+    .dataTables_filter,
+    .dataTables_info,
+    .dataTables_paginate {
+        margin: 1rem 0;
+    }
+    
+    .dataTables_length select {
+        border: 1px solid #d1d5db;
+        border-radius: 0.5rem;
+        padding: 0.25rem 0.5rem;
+    }
+    
+    .dataTables_filter input {
+        border: 1px solid #d1d5db;
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+    }
+}
+
+
+// Button styling
+.btn-addUT {
+    padding: 12px 24px !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    border: none !important;
+    border-radius: 9999px !important;
+    background-color: $primary-color !important;
+    color: white !important;
+    box-shadow: 0 4px 6px -1px $shadow-light, 0 2px 4px -1px $shadow-light;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    margin-bottom: 0;
+
+    &:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 8px 12px -1px $shadow-dark, 0 4px 6px -2px $shadow-dark !important;
+        background-color: darken($primary-color, 5%) !important;
+    }
+
+    &:active {
+        transform: translateY(0) !important;
+        box-shadow: 0 2px 4px -1px $shadow-light !important;
+    }
+
+    .bi-plus-circle {
+        margin-right: 0.5rem;
+    }
+}
+.btn-primary {
+  background-color: #3578dc !important; // 🔴 red override
+  border-color: #000000 !important;
+}
+
+
+// Action buttons in table
+.btn-sm {
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.875rem !important;
+    border-radius: 0.25rem !important;
+}
+
+// Pagination styling
+.dataTables_paginate {
+    .paginate_button {
+        padding: 0.5rem 0.75rem;
+        margin: 0 0.25rem;
+        border-radius: 0.5rem;
+        border: 1px solid #d1d5db;
+        background: white;
+        color: $text-color;
+        
+        &:hover {
+            background: $primary-color;
+            color: white;
+            border-color: $primary-color;
+        }
+        
+        &.current {
+            background: $primary-color;
+            color: white;
+            border-color: $primary-color;
+        }
+    }
+}
+
+.d-flex.justify-content-end.align-items-center.mb-3 {
+    margin-top: 2rem;
+}
+
+// COMPREHENSIVE RESPONSIVE DESIGN FOR ALL DEVICES
+
+// Extra Large Desktop (1400px+)
+@media (min-width: 1400px) {
+    .user-types-container {
+        max-width: 1600px;
+        padding: 3rem;
+        padding-left: 320px;
+    }
+    
+    .page-header {
+        margin-bottom: 3rem;
+    }
+    
+    .table-card {
+        padding: 3rem;
+    }
+    
+    .modern-table {
+        font-size: 1rem;
+        
+        thead th {
+            padding: 1.5rem !important;
+            font-size: 1rem;
+        }
+        
+        tbody td {
+            padding: 1.5rem !important;
+        }
+    }
+}
+
+// Large Desktop (1200px - 1399px)
+@media (max-width: 1399px) and (min-width: 1200px) {
+    .user-types-container {
+        padding: 2rem;
+        padding-left: 300px;
+    }
+}
+
+// Medium Desktop/Large Tablet (992px - 1199px)
+@media (max-width: 1199px) and (min-width: 992px) {
+    .user-types-container {
+        padding: 1.5rem;
+        padding-left: 280px;
+        max-width: 100vw;
+    }
+    
+    .table-card {
+        padding: 1.5rem;
+    }
+    
+    .page-header {
+        gap: 1rem;
+    }
+    
+    .header-stats {
+        gap: 1rem;
+    }
+    
+    .stat-card {
+        padding: 0.75rem 1.5rem;
+        min-width: 120px;
+    }
+    
+    .stat-value {
+        font-size: 1.75rem;
+    }
+}
+
+// Tablet Landscape (768px - 991px)
+@media (max-width: 991px) and (min-width: 768px) {
+    .user-types-container {
+        padding: 1rem;
+        padding-left: 250px;
+        max-width: 100vw;
+    }
+    
+    .table-card {
+        padding: 1rem;
+    }
+    
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+    
+    .header-content {
+        width: 100%;
+        
+        h2.page-title {
+            font-size: 2rem;
+        }
+    }
+    
+    .header-stats {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .stat-card {
+        flex: 1;
+        min-width: 140px;
+    }
+    
+    .card-header {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .header-right {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .modern-table {
+        min-width: 700px;
+        font-size: 0.9rem;
+        
+        thead th {
+            padding: 1rem 0.75rem !important;
+            font-size: 0.8rem;
+        }
+        
+        tbody td {
+            padding: 1rem 0.75rem !important;
+        }
+    }
+    
+    .btn-addUT {
+        font-size: 0.9rem;
+        padding: 10px 20px !important;
+    }
+}
+
+// Tablet Portrait (576px - 767px)
+@media (max-width: 767px) and (min-width: 576px) {
+    .user-types-container {
+        padding: 1rem;
+        padding-left: 200px;
+        max-width: 100vw;
+    }
+    
+    .table-card {
+        padding: 1rem;
+        border-radius: 0.75rem !important;
+    }
+    
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .header-content {
+        h2.page-title {
+            font-size: 1.75rem;
+        }
+        
+        .title-icon {
+            font-size: 1.5rem;
+            margin-right: 0.75rem;
+        }
+    }
+    
+    .header-stats {
+        width: 100%;
+        flex-direction: row;
+        gap: 0.75rem;
+    }
+    
+    .stat-card {
+        flex: 1;
+        padding: 0.75rem 1rem;
+        min-width: 100px;
+    }
+    
+    .stat-value {
+        font-size: 1.5rem;
+    }
+    
+    .stat-label {
+        font-size: 0.75rem;
+    }
+    
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .header-left {
+        width: 100%;
+        
+        .card-title {
+            font-size: 1.25rem;
+        }
+    }
+    
+    .header-right {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+    
+    // Table becomes horizontally scrollable with better mobile UX
+    .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 0.5rem;
+    }
+    
+    .modern-table {
+        min-width: 600px;
+        font-size: 0.85rem;
+        
+        thead th {
+            padding: 0.75rem 0.5rem !important;
+            font-size: 0.75rem;
+            white-space: nowrap;
+        }
+        
+        tbody td {
+            padding: 0.75rem 0.5rem !important;
+            white-space: nowrap;
+            
+            &:first-child {
+                width: 50px;
+            }
+            
+            &:last-child {
+                width: 70px;
+            }
+        }
+    }
+    
+    .btn-addUT {
+        font-size: 0.85rem;
+        padding: 8px 16px !important;
+        width: auto;
+    }
+    
+    .search-input {
+        width: 140px !important;
+        min-width: 140px;
+    }
+    
+    .entries-selector {
+        .form-select {
+            width: 60px;
+        }
+    }
+}
+
+// Mobile Landscape (481px - 575px)
+@media (max-width: 575px) and (min-width: 481px) {
+    .user-types-container {
+        padding: 0.75rem;
+        padding-left: 1rem;
+        max-width: 100vw;
+    }
+    
+    .table-card {
+        padding: 0.75rem;
+        border-radius: 0.5rem !important;
+    }
+    
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .header-content {
+        h2.page-title {
+            font-size: 1.5rem;
+        }
+        
+        .page-subtitle {
+            font-size: 0.85rem;
+        }
+    }
+    
+    .header-stats {
+        width: 100%;
+        flex-direction: row;
+        gap: 0.5rem;
+    }
+    
+    .stat-card {
+        flex: 1;
+        padding: 0.5rem 0.75rem;
+        min-width: 80px;
+    }
+    
+    .stat-value {
+        font-size: 1.25rem;
+    }
+    
+    .stat-label {
+        font-size: 0.7rem;
+    }
+    
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+    
+    .header-right {
+        width: 100%;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .modern-table {
+        min-width: 500px;
+        font-size: 0.8rem;
+        
+        thead th {
+            padding: 0.5rem 0.25rem !important;
+            font-size: 0.7rem;
+        }
+        
+        tbody td {
+            padding: 0.5rem 0.25rem !important;
+        }
+    }
+    
+    .btn-addUT {
+        font-size: 0.8rem;
+        padding: 8px 14px !important;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .search-input {
+        width: 100% !important;
+        max-width: 100%;
+    }
+    
+    .entries-selector {
+        width: 100%;
+        justify-content: flex-start;
+    }
+}
+
+// Mobile Portrait (320px - 480px)
+@media (max-width: 480px) {
+    .user-types-container {
+        padding: 0.5rem;
+        padding-left: 0.5rem;
+        max-width: 100vw;
+    }
+    
+    .table-card {
+        padding: 0.5rem;
+        border-radius: 0.5rem !important;
+        margin: 0;
+    }
+    
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .header-content {
+        h2.page-title {
+            font-size: 1.25rem;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        
+        .title-icon {
+            font-size: 1.25rem;
+            margin-right: 0;
+            margin-bottom: 0.25rem;
+        }
+        
+        .page-subtitle {
+            font-size: 0.8rem;
+        }
+    }
+    
+    .header-stats {
+        width: 100%;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .stat-card {
+        width: 100%;
+        padding: 0.75rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+    }
+    
+    .stat-value {
+        font-size: 1.5rem;
+        order: 2;
+    }
+    
+    .stat-label {
+        font-size: 0.8rem;
+        order: 1;
+        text-transform: none;
+        letter-spacing: 0;
+        margin-top: 0;
+    }
+    
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .header-left {
+        .card-title {
+            font-size: 1.1rem;
+        }
+        
+        .entries-info {
+            font-size: 0.75rem;
+        }
+    }
+    
+    .header-right {
+        width: 100%;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    // Mobile table with card-style layout for better UX
+    .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .modern-table {
+        min-width: 400px;
+        font-size: 0.75rem;
+        
+        thead th {
+            padding: 0.5rem 0.25rem !important;
+            font-size: 0.65rem;
+        }
+        
+        tbody td {
+            padding: 0.5rem 0.25rem !important;
+            line-height: 1.3;
+            
+            &:first-child {
+                width: 40px;
+                font-size: 0.7rem;
+            }
+            
+            &:nth-child(2) {
+                font-weight: 600;
+                min-width: 80px;
+            }
+            
+            &:last-child {
+                width: 60px;
+            }
+        }
+    }
+    
+    .btn-addUT {
+        font-size: 0.75rem;
+        padding: 10px 16px !important;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .search-input {
+        width: 100% !important;
+        font-size: 0.9rem;
+    }
+    
+    .entries-selector {
+        width: 100%;
+        
+        .form-select {
+            font-size: 0.85rem;
+        }
+    }
+}
+
+// Very Small Mobile (up to 319px)
+@media (max-width: 319px) {
+    .user-types-container {
+        padding: 0.25rem;
+    }
+    
+    .table-card {
+        padding: 0.25rem;
+    }
+    
+    .header-content {
+        h2.page-title {
+            font-size: 1.1rem;
+        }
+    }
+    
+    .modern-table {
+        min-width: 300px;
+        font-size: 0.7rem;
+        
+        thead th {
+            padding: 0.25rem !important;
+            font-size: 0.6rem;
+        }
+        
+        tbody td {
+            padding: 0.25rem !important;
+        }
+    }
+}
+
+// Print styles
+@media print {
+    .user-types-container {
+        padding: 0;
+        padding-left: 0;
+        max-width: 100%;
+    }
+    
+    .table-card {
+        box-shadow: none;
+        border: 1px solid #000;
+        padding: 1rem;
+    }
+    
+    .header-stats,
+    .btn-addUT,
+    .header-right {
+        display: none;
+    }
+    
+    .modern-table {
+        font-size: 0.8rem;
+        
+        thead th {
+            background-color: #f0f0f0 !important;
+            color: #000 !important;
+        }
+    }
+}

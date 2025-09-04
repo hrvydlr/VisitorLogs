@@ -2,61 +2,68 @@
 @extends('layout')
 
 @section('content')
-<div id="login-containers">
-  <div class="clouds-container"></div>
+<div id="login">
+        <div class="container-fluid d-flex justify-content-center align-items-center vh-100">
+            <div class="row login-form-container">
+                <div class="col-12 col-lg-6 welcome-container d-flex flex-column justify-content-center align-items-center text-white">
+                    <img src="{{ asset('Images/compass.png') }}" alt="Compass Icon" class="img-fluid mb-2 mw-250">
+                    <h1 class="welcome-txt">Welcome to <br>Magellan Solutions!</h1>
+                    <p class="tagline">See The Future Your Way</p>
+                </div>
+                <div class="col-12 col-lg-6 login-form d-flex justify-content-center align-items-center">
+                    <form action="{{ route('login') }}" method="POST" class="d-flex flex-column align-items-center w-75">
+                        @csrf 
+                    <h1 class="logintxt text-center fw-bolder text-white">Login</h1>
 
-  <div class="object container-fluid d-flex align-items-center justify-content-cente z-2">
-    <div class="row w-100 pe-5">
+                        <div class="input-box w-100">
+                            <span class="input-box-text">
+                                <i class="bi bi-person-fill"></i>
+                            </span>
+                            <input type="text"
+                                   name="username"
+                                   id="username"
+                                   placeholder="Username"
+                                   autocomplete="off"
+                                   required>
+                        </div>
 
-      <div class="col-md-5 ms-2 mt-5 d-flex justify-content-center align-items-center logo-container">
-        <img src="/images/logo.png" class="img-fluid" alt="Logo">
-      </div>
-
-      <div class="d-flex justify-content-end align-items-center login-form-container">
-        <form class="p-5 forma w-100 bg-white" action="{{ route('login') }}" method="POST">
-          @csrf
-          <h2 class="logintxt text-center mb-5 fw-bolder">LOGIN</h2>
-
-          <div class="input-group mb-3 d-flex">
-            <span class="text-white d-flex align-items-center justify-content-center">
-              <i class="bi bi-person-fill d-flex p-3" style="font-size: 1.2em;"></i>
-            </span>
-            <input type="text" name="username" class="form-control text-white" placeholder="Username" autocomplete="off">
-          </div>
-
-          <div class="input-group mb-4 d-flex">
-            <span class="text-white d-flex align-items-center justify-content-center">
-              <i class="bi bi-lock-fill d-flex p-3" style="font-size: 1.2em;"></i>
-            </span>
-            <input type="password" name="password" class="form-control text-white" placeholder="Password" id="passwordInput" autocomplete="off">
-            <span class="text-white d-flex align-items-center justify-content-center" id="togglePassword">
-              <i class="bi bi-eye-fill p-3" id="eyeIcon"></i>
-            </span>
-          </div>
-
-          <button type="submit" class="btn w-100 rounded-pill fw-bold">LOGIN</button>
-        </form>
-      </div>
+                        <div class="input-box w-100">
+                            <span class="input-box-text">
+                                <i class="bi bi-lock-fill"></i>
+                            </span>
+                            <input type="password"
+                                   name="password"
+                                   id="password"
+                                   placeholder="Password"
+                                   autocomplete="off"
+                                   required>
+                            <button type="button" class="togglePassword-btn" onclick="togglePasswordVisibility()">
+                                <i id="togglePasswordIcon" class="bi bi-eye-fill"></i>
+                            </button>
+                        </div>
+                        <button type="submit" class="loginbtn mt-2">LOGIN</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+    
 @endsection
 
 @push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  const passwordInput = document.getElementById('passwordInput');
-  const togglePassword = document.getElementById('togglePassword');
-  const eyeIcon = document.getElementById('eyeIcon');
-
-  if (togglePassword && passwordInput && eyeIcon) {
-    togglePassword.addEventListener('click', function () {
-      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-      passwordInput.setAttribute('type', type);
-      eyeIcon.classList.toggle('bi-eye-fill');
-      eyeIcon.classList.toggle('bi-eye-slash-fill');
-    });
-  }
-});
-</script>
+    <script>
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('password');
+            const toggleBtnIcon = document.getElementById('togglePasswordIcon');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleBtnIcon.classList.remove('bi-eye-fill');
+                toggleBtnIcon.classList.add('bi-eye-slash-fill');
+            } else {
+                passwordInput.type = 'password';
+                toggleBtnIcon.classList.remove('bi-eye-slash-fill');
+                toggleBtnIcon.classList.add('bi-eye-fill');
+            }
+        }
+    </script>
 @endpush

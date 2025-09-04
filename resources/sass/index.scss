@@ -1,0 +1,456 @@
+    #report_container {      
+       .reports {
+            position: relative;
+             top: 10vh;
+             left: 8px;
+        }
+
+        .card {
+            width: 120%;
+            position : 
+            relative; 
+            top: 120px;
+            overflow-x: hidden; 
+        }
+
+        #reportsTable th,
+        #reportsTable td {
+            border-left: none !important;
+            border-right: none !important;
+        }
+
+        #reportsTable thead th {
+            vertical-align: middle !important;
+        }
+
+        #reportsTable tbody tr:hover td {
+            background-color: #0000001e !important;
+        }
+
+        
+        @media screen and (min-width: 400px) and (max-width: 5760px){
+            .card {
+                width: 100%!important;
+                height: 50%!important;
+            }
+            
+
+            @media screen and (min-width: 580px) {
+            .card {
+                position: relative;
+                width: 105%!important;
+                height: 50%!important;
+                right: 2%;
+            }
+            
+        }
+
+        @media screen and (min-width: 770px) {
+            body{
+                overflow: hidden;
+            }
+            .card {
+                width: 70%!important;
+                left:34%;
+                
+            }
+
+            .reports{            
+                position: relative;
+                left: 35%!important;
+            }
+        }
+
+        @media screen and (min-width: 850px) {
+            .card {
+                width: 90%!important;
+                height: 50%!important;
+                left:24%;
+            }
+            .reports{            position: relative;
+                left: 26%!important;
+            }
+        }
+
+        @media screen and (min-width: 1000px) {
+            .card {
+                width: 80%!important;
+                left:24%;
+            }
+            .reports{            position: relative;
+                left: 25%!important;
+            }
+        }
+
+        @media screen and (min-width: 1200px) {
+            .card {
+                width:85%!important;         
+                left:19%;
+            }
+            .reports{            position: relative;
+                left: 19%!important;
+            }
+        }
+
+        @media screen and (min-width: 1600px) {
+            .card {
+                width: 100%!important;         
+                left:10%;
+            }
+            .reports{            position: relative;
+                left: 11.5%!important;
+            }
+        }
+
+        @media screen and (min-width: 1800px) {
+            .card {
+                width: 120%!important;
+                height: auto!important;
+                max-height: 650px!important;           
+                left:0%;
+            }
+            .reports{            position: relative;
+                left: 1.5%!important;
+            }
+        }
+
+    }
+} 
+
+    #visitor_type_index {
+        #btn-addVT {
+            padding: 12px; 
+            position: relative; 
+            right: 25px;
+        }
+
+        .visitortype {
+            position: relative; 
+            bottom: 50px; 
+            left: 8px;
+        }
+
+        .card {
+           width: 120%; 
+           position : relative; 
+           bottom: 30px;
+           overflow-x: hidden;
+        }
+
+        #visitorTypeTable th,
+        #visitorTypeTable td {
+            border-left: none !important;
+            border-right: none !important;
+        }
+
+        #visitorTypeTable thead th {
+            vertical-align: middle !important;
+        }
+
+        #visitorTypeTable tbody tr:hover td {
+            background-color: #0000001e !important;
+        }
+
+        @media screen and (min-width: 400px) and (max-width: 5760px){
+            .card {
+                width: 100%!important;
+                height: 50%!important;
+            }
+            
+
+            @media screen and (min-width: 580px) {
+                body{
+                overflow: hidden;
+                }
+            .card {
+                position: relative;
+                width: 110%!important;
+                height: 50%!important;
+                right: 5%;
+            }
+            
+        }
+
+        @media screen and (min-width: 770px) {
+            body{
+                overflow: hidden;
+            }
+            .card {
+                width: 70%!important;
+             
+                left:34%;
+                
+            }
+
+
+            .visitortype{            position: relative;
+                left: 35%!important;
+            }
+        }
+
+        @media screen and (min-width: 850px) {
+            .card {
+                width: 80%!important;
+                height: 50%!important;
+                left:28.5%;
+            }
+            .visitortype{            position: relative;
+                left: 30%!important;
+            }
+        }
+
+        @media screen and (min-width: 1000px) {
+            .card {
+                width: 75%!important;
+                left:26.5%;
+            }
+            .visitortype{            position: relative;
+                left: 28%!important;
+            }
+        }
+
+        @media screen and (min-width: 1200px) {
+            .card {
+                width: 85%!important;         
+                left:19%;
+            }
+            .visitortype{            position: relative;
+                left: 21%!important;
+            }
+        }
+
+        @media screen and (min-width: 1600px) {
+            .card {
+                width: 100%!important;         
+                left:10%;
+            }
+            .visitortype{            position: relative;
+                left: 11.5%!important;
+            }
+        }
+
+        @media screen and (min-width: 1800px) {
+            .card {
+                width: 120%!important;
+                height: auto!important;
+                max-height: 650px!important;        
+                left:0%;
+            }
+            .visitortype{            position: relative;
+                left: 2%!important;
+            }
+        }
+    }
+}
+
+    #user_type_index {
+        #btn-addUT {
+            padding: 12px; 
+            position: relative; 
+            right: 25px;
+        }
+
+        .usertype {
+            position: relative; 
+            bottom: 50px; 
+            left: 8px;
+        }
+
+        .card {
+             width: 120%; 
+             position : relative; 
+             bottom: 30px;
+        }
+
+        #userType th,
+        #userType td {
+            border-left: none !important;
+            border-right: none !important;
+        }
+
+        #userType thead th {
+            vertical-align: middle !important;
+        }
+
+        #userType tbody tr:hover td {
+            background-color: #0000001e !important;
+        }
+    }
+
+    #user_index {
+        #btn-addUsers {
+            padding: 12px; 
+            position: relative; 
+            right: 25px;
+        }
+
+        .user {
+            position: relative; 
+            bottom: 50px; 
+            left: 8px;
+        }
+
+        .card {
+             width: 120%;
+             position : relative; 
+             bottom: 30px;
+             overflow-x: hidden; 
+        }
+
+        #usersTable th,
+        #usersTable td {
+            border-left: none !important;
+            border-right: none !important;
+        }
+
+        #usersTable thead th {
+            vertical-align: middle !important;
+        }
+
+        #usersTable tbody tr:hover td {
+            background-color: #0000001e !important;
+        }
+
+        @media screen and (min-width: 400px) and (max-width: 5760px){
+            .card {
+                width: 100%!important;
+                height: 50%!important;
+            }
+            
+
+            @media screen and (min-width: 580px) {
+            .card {
+                position: relative;
+                width: 105%!important;
+                height: 50%!important;
+                right: 2%;
+            }
+            
+        }
+
+        @media screen and (min-width: 770px) {
+            body{
+                overflow: hidden;
+            }
+            .card {
+                width: 70%!important;
+             
+                left:34%;
+                
+            }
+
+
+            .user{            position: relative;
+                left: 35%!important;
+            }
+        }
+
+        @media screen and (min-width: 850px) {
+            .card {
+                width: 90%!important;
+                height: 50%!important;
+                left:24%;
+            }
+            .user{            position: relative;
+                left: 26%!important;
+            }
+        }
+
+        @media screen and (min-width: 1000px) {
+            .card {
+                width: 82%!important;
+                left:23%;
+            }
+            .user{            position: relative;
+                left: 25%!important;
+            }
+        }
+
+        @media screen and (min-width: 1200px) {
+            .card {
+                width: 87%!important;         
+                left:18%;
+            }
+            .user{            position: relative;
+                left: 19%!important;
+            }
+        }
+
+        @media screen and (min-width: 1600px) {
+            .card {
+                width: 100%!important;         
+                left:10%;
+            }
+            .user{            position: relative;
+                left: 11.5%!important;
+            }
+        }
+
+        @media screen and (min-width: 1800px) {
+            .card {
+                width: 120%!important;
+                height: auto!important;
+                max-height: 650px!important;         
+                left:0%;
+            }
+            .user{            position: relative;
+                left: 2%!important;
+            }
+        }
+    }
+
+    }
+
+    #registered_id_index {
+        #btn-addID {
+            padding: 12px; 
+            position: relative; 
+            right: 45px;
+        }
+
+        .registerid {
+            position: relative; 
+            bottom: 50px; 
+            left: 8px;
+        }
+
+        .card {
+             width: 120%; 
+             position : relative; 
+             bottom: 30px;
+        }
+
+        #registeredidTable th,
+        #registeredidTable td {
+            border-left: none !important;
+            border-right: none !important;
+        }
+
+        #registeredidTable thead th {
+            vertical-align: middle !important;
+        }
+
+        #registeredidTable tbody tr:hover td {
+            background-color: #0000001e !important;
+        }
+    }
+
+    #guard_index {
+        #btn-addUsers {
+            position: relative; 
+            right: 110px; 
+            padding: 12px;
+        }
+        
+        .registerid {
+            position: relative; 
+            bottom: 50px; 
+            left: -190px;
+        }
+        .card {
+            width: 130%; 
+            position : relative; 
+            bottom: 30px; 
+            margin-left: -200px;
+        }
+    }

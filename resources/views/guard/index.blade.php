@@ -3,19 +3,19 @@
 <body>
 
     @section('button')
-        <div class="button1 d-flex justify-content-end align-items-center mt-5 pt-5 w-100">
+        <div class="button1 d-flex justify-content-end align-items-center mt-5 pt-5 w-100" id="guard_index">
             <a href="{{ route('guard.form') }}" target="_blank" class="btn btn-primary btn-md rounded-pill"
-                style="position: relative; right: 110px; padding: 12px;" id="btn-addUsers"><i class="bi bi-plus-circle"></i>
+                 id="btn-addUsers"><i class="bi bi-plus-circle"></i>
                 Add Visitor</a>
         </div>
     @endsection
 
 
     @section('content')
-        <div class="container">
-            <h2 class="registerid" style= "position: relative; bottom: 50px; left: -190px">Visitor Log Sheets</h2>
+        <div class="container" id="guard_index">
+            <h2 class="registerid">Visitor Log Sheets</h2>
             <!-- Existing Users Table -->
-            <div class="card" style= "width: 130%; position : relative; bottom: 30px; margin-left: -200px">
+            <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">All Users</h5>
 
