@@ -23,5 +23,6 @@
 
 @push('scripts')
 <script> let default_fields = {!!json_encode(config('constants.crud.visitor')) !!} </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @vite(['resources/js/Visitors.js'])
 @endpush

@@ -43,23 +43,57 @@ $(document).ready(function() {
         });
 
 
-        // Timeout visitor (delegated)
-        $(document).on('click', '.btn-timeout', function () {
-            const id = $(this).data('id');
-            if (!id) return;
-            if (window.confirm('Are you sure you want to timeout this visitor?')) {
+    // Timeout visitor (delegated)
+    $(document).on('click', '.btn-timeout', function () {
+        const id = $(this).data('id');
+        // Use the already defined CSRF_TOKEN constant
+        // const csrfToken = $('meta[name="csrf-token"]').attr('content'); // This line is not needed
+        if (!id) return;
+
+        Swal.fire({
+            text: 'Do you want to timeout this visitor?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#1C2A39',
+            cancelButtonColor: '#b40000',
+            confirmButtonText: 'Yes, timeout them!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
                 $.ajax({
                     url: `${URL_BASE}setTimeout/${id}`,
                     type: 'POST',
-                    data: { _token: CSRF_TOKEN },
+                    data: { _token: CSRF_TOKEN }, // Use the constant defined at the top
                     success: (res) => {
-                        alert(res.message);
+                        // Success toast notification
+                        Swal.fire({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'success',
+                            title: res.message || 'Visitor timed out successfully!',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                        });
                         $table.DataTable().ajax.reload(null, false);
                     },
-                    error: () => alert('Something went wrong!')
+                    error: (xhr) => {
+                        // Error toast notification
+                        const errorMsg = xhr.responseJSON?.message || 'Something went wrong!';
+                        Swal.fire({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'error',
+                            title: errorMsg,
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                        });
+                    }
                 });
             }
         });
+    });
 
         // View details (delegated)
         $(document).on('click', '.btn-view', function () {
