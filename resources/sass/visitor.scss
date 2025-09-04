@@ -4,16 +4,17 @@
             overflow-x: hidden; /* Optional, helps avoid scrollbars inside card */
             
         }
+        
 
         @media screen and (min-width: 400px) and (max-width: 5760px){
-            .card {
+            .card{
                 width: 100%!important;
                 height: 50%!important;
             }
             
 
             @media screen and (min-width: 580px) {
-            .card {
+            .card-header {
                 position: relative;
                 width: 105%!important;
                 height: 50%!important;
