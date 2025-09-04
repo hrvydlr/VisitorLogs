@@ -7,6 +7,7 @@
 @use 'visitorlog';
 @use 'modal';
 @use 'visitor';
+@use 'show';
 
 /* 2) Keep Bootstrap as @import for now (Bootstrap isn’t module-migrated yet) */
 @import 'bootstrap/scss/bootstrap';

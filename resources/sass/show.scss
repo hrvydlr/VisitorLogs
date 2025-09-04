@@ -1,0 +1,51 @@
+:root {
+  --sidebar-width: 350px; 
+}
+
+
+.main-content {
+  margin-left: var(--sidebar-width);
+  padding: 20px;
+}
+
+#show-container {
+    max-width: 1400px; 
+    width: 100%;
+    margin-top: 60px;
+    margin-left: 0; 
+    margin-right: auto;
+}
+
+#show-container .card {
+    font-size: 18px;
+    padding: 20px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+#show-container i {
+    color:#0d4a8c;
+}
+
+#show-container h5 {
+    color: #0d4a8c;
+}
+
+#show-container .image-container {
+    width: 320px; 
+    height: 320px;
+}
+
+@media (max-width: 600px) {
+    .main-content {
+        margin-left: 0; 
+    }
+    #show-container {
+        margin-top: 60px !important;
+        margin: 0 auto;
+    }
+    #show-container .card {
+        margin-bottom: 20px;
+    }
+}

@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="container">
-    <h2 style="position: relative; top: 100px; left: 160px"> Visitor Details</h2>
+    <h2 style="position: relative; top: 100px; left: 100px"> Visitor Details</h2>
     <div class="card" style="width: 75%; position: relative; top: 120px; font-size: 18px; padding: 20px; left: 150px;">
         <div class="card-body">
         
