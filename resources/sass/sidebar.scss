@@ -2,7 +2,7 @@
     .side-menu {
         width: 260px;
         height: 100vh;
-        background: linear-gradient(rgb(10, 75, 158), rgb(21, 106, 197), rgb(57, 152, 237));
+        background-image: linear-gradient(to bottom, #0F4383 , #145AB0, #145AB0, #3492E9);
         position:fixed;
         top: 0;
         left: 0px;
@@ -10,7 +10,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding-top: 20px;
+        padding-top: 80px;
         transition: left 0.3s ease;
     }
 
@@ -21,16 +21,9 @@
         background-color: none;
         border: none;
         color: white;
-        font-size: 30px;
-        
+        font-size: 30px;   
     }
 
-    .logo {
-        width: 190px;
-        margin-top: -10px;
-        right: 15px;
-        position: relative;
-    }
     @media (max-width: 768px) {
         .side-menu {
             left: -260px; /* Initially hide sidebar */
@@ -84,4 +77,10 @@
 /* Ensure consistent color for all links */
 .nav-link, .accordion-button {
     color: white !important; /* Ensure white text color */
+    margin-bottom: 10px;
+}
+
+.nav-link:hover, .accordion-button:hover {
+    background-color: #3492E9 !important; 
+    border-radius: 2px;
 }
