@@ -26,6 +26,7 @@ class VisitorController extends Controller
         $validator = Validator::make($request->all(),[
             'first_name'    => 'required',
             'last_name'     => 'required',
+            'middle_name'     => 'required',
             'number'        => 'required',
             'id_number'     => 'required',
             'visitor_type'  => 'required',
