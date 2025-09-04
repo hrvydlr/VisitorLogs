@@ -14,7 +14,7 @@
                         <div class="row g-0 d-flex justify-content-center">
                             <div class="card-body">
                                 <div class="notification-body">
-                                    <div class="row">
+                                    <div class="row style">
                                         <div class="col-md-12 py-3">
                                             <h5 class="card-title text-center" id="notification-message"></h5>
                                             <input type="hidden" name="record_id" id="record_id"

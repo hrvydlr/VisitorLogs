@@ -2,11 +2,11 @@
 
 
 @section('content')
-<div class="container">
-    <h2 style="position: relative; top: 100px; left: 310px"> Visitor Details</h2>
-    <div class="card" style="width: 75%; position: relative; top: 120px; font-size: 18px; padding: 20px; left: 300px;">
+<div class="container" id="visitor_show">
+    <h2> Visitor Details</h2>
+    <div class="card">
         <div class="card-body">
-            <div class="col-md-4" style="transform:scaleX(-1);">
+            <div class="col-md-4" >
                                     <!-- Display visitor image -->
                                     @if($visitor->image_path)
                                         <img src="{{ asset($visitor->image_path) }}" alt="Visitor Image" class="img-fluid">
@@ -27,7 +27,7 @@
             <p><strong>Last Updated By:</strong> {{ $visitor->updater ? $visitor->updater->username : 'N/A' }}</p>
 
             <div class="d-flex justify-content-end mt-4">
-                <a href="{{ route('visitor.index') }}" class="btn btn-primary btn-md rounded-pill" style="position: relative; right: 25px">Back to Visitors</a>
+                <a href="{{ route('visitor.index') }}" class="btn btn-primary btn-md rounded-pill">Back to Visitors</a>
             </div>
         </div>
     </div>

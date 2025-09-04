@@ -18,13 +18,14 @@
     @endif
 
     @section('button')
-    <div class="d-flex justify-content-end align-items-center mt-5 pt-5 w-100">
-        <button type="button" class="btn btn-primary btn-md rounded-pill" id="btn-addID" style="padding: 12px; position: relative; right: 25px"><i class="bi bi-plus-circle"></i>  Register ID</button>
+    <div class="d-flex justify-content-end align-items-center mt-5 pt-5 w-100" id="registered_id_index">
+        <button type="button" class="btn btn-primary btn-md rounded-pill" id="btn-addID"><i class="bi bi-plus-circle"></i>  Register ID</button>
     </div>
 @endsection
-<h2 class="registerid" style="position: relative; bottom: 50px; left: 8px">Registered IDs</h2>
+<div class="container" id="registered_id_index">
+<h2 class="registerid">Registered IDs</h2>
     <!-- Existing Registered IDs Table -->
-    <div class="card" style="width: 120%; position : relative; bottom: 30px">
+    <div class="card">
         <div class="card-body">
             <h5 class="card-title">All Registered IDs</h5>
 

@@ -2,9 +2,9 @@
 
 
 @section('content')
-<div class="container">
-    <h2 style="position: relative; top: 100px; left: 160px"> Visitor Details</h2>
-    <div class="card" style="width: 75%; position: relative; top: 120px; font-size: 18px; padding: 20px; left: 150px;">
+<div class="container" id="guard_show">
+    <h2> Visitor Details</h2>
+    <div class="card">
         <div class="card-body">
         
             <p><strong>Full Name:</strong> {{ $visitor->first_name }} {{ $visitor->middle_name }} {{ $visitor->last_name }}</p>
@@ -24,7 +24,7 @@
 
                 <div style="flex-shrink: 0;">
                     @if($visitor->image_path)
-                        <img src="{{ asset($visitor->image_path) }}" alt="Visitor Image" class="img-fluid rounded" style="width: 400px; height: auto; object-fit: cover;">
+                        <img src="{{ asset($visitor->image_path) }}" alt="Visitor Image" class="img-fluid rounded">
                     @else
                         <p>No Image Available</p>
                     @endif
@@ -32,7 +32,7 @@
             </div>
 
             <div class="d-flex justify-content-end mt-4">
-                <a href="{{ route('guard.index') }}" class="btn btn-primary btn-md rounded-pill" style="position: relative; right: 25px">Back to Visitors</a>
+                <a href="{{ route('guard.index') }}" class="btn btn-primary btn-md rounded-pill">Back to Visitors</a>
             </div>
         </div>
     </div>

@@ -3,18 +3,18 @@
 
 
 @section('button')
-    <div class="d-flex justify-content-end align-items-center mt-5 pt-5 w-100 ">
-        <button type="button" class="btn btn-primary btn-md rounded-pill" id="btn-addUT" style="padding: 12px; position: relative; right: 25px"><i class="bi bi-plus-circle"></i> Add User Type</button>
+    <div class="d-flex justify-content-end align-items-center mt-5 pt-5 w-100 " id="user_type_index">
+        <button type="button" class="btn btn-primary btn-md rounded-pill" id="btn-addUT"><i class="bi bi-plus-circle"></i> Add User Type</button>
     </div>
 @endsection
 
 
 @section('content')
-<div class="container">
+<div class="container" id = "user_type_index">
 
-<h2 class="usertype" style="position: relative; bottom: 50px; left: 8px">User Types</h2>
+<h2 class="usertype">User Types</h2>
     <!-- Existing Visitor Types Table -->
-    <div class="card " style="width: 120%; position : relative; bottom: 30px">
+    <div class="card ">
         <div class="card-body">
             <h5 class="card-title">All User Types</h5>
 

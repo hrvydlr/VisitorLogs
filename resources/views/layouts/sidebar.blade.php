@@ -2,7 +2,6 @@
 @if(auth()->check() && auth()->user()->user_type == 1)
 <div id="side-bar-menu">
     <div class="side-menu" id="sideMenu">
-        <img src="/images/Magellan_pure_white_logo.png" alt="logo" class="logo">
         <ul class="nav sidebar-menu flex-column list-unstyled w-100 px-3">
 
             <!-- Visitor Log Sheets -->
