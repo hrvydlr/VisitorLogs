@@ -1,15 +1,16 @@
 @extends('layout')
 
+
 @section('content')
 <div class="main-content">
     <div id="show-container" class="d-flex flex-column align-items-center mb-3">
-        <div class="d-flex w-100 justify-content-start align-items-center mb-3">
+        <div class="d-flex w-100 justify-content-start align-items-center mb-4">
             <a href="{{ route('visitor.index') }}" class="btn btn-link text-dark me-2">
                 <i class="bi bi-arrow-left fs-4"></i>
             </a>
             <h2 class="mb-1">Visitor Details</h2>
         </div>
-        <div class="card p-5 shadow-sm w-100">
+        <div class="card p-5 shadow-sm w-100 mt-4">
             <div class="row g-5">
                 <div class="col-lg-3 d-flex flex-column align-items-center text-center">
                     <div class="image-container border p-2 rounded mb-4">
@@ -80,9 +81,4 @@
         </div>
     </div>
 </div>
-@include('components.toast')
 @endsection
-
-@push('scripts')
-@vite(['resources/js/Visitors.js'])
-@endpush

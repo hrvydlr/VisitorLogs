@@ -93,7 +93,7 @@ class VisitorController extends Controller
             Visitor::create($data);
             $message = 'Visitor added successfully!';
         }
-        return response()->json([$message]);
+        return response()->json(['message' => $message]);
        
         // return redirect()->route('visitor.form')->with('success', $message);
     }

@@ -48,14 +48,63 @@ $(document).ready(function() {
     // }
 
 
-        // Save form
-        $(FORM_SEL).on('submit', function (e) {
-            e.preventDefault();
-          
-            common.saveForm(URL_BASE + 'save',TABLE_SEL,FORM_SEL,new FormData(this));
-        });
+        // ──────────────────────────────────────────────────────────────
+    // Form Submission
+    // ──────────────────────────────────────────────────────────────
+    $(FORM_SEL).on('submit', function(e) {
+        e.preventDefault();
 
-        
-    
+        const form = $(this)[0];
+        if (form.checkValidity() === false) {
+            e.stopPropagation();
+            $(this).addClass('was-validated');
+            return;
+        }
+
+        let formData = new FormData(form);
+
+        $.ajax({
+            url: URL_BASE + 'save',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            headers: {
+                'X-CSRF-TOKEN': CSRF_TOKEN
+            },
+            success: function(response) {
+                Swal.fire({
+                    toast: true,
+                    icon: 'success',
+                    title: response.message, 
+                    animation: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true
+                }).then(() => {
+                    window.location.href = URL_BASE;
+                });
+            },
+            error: function(xhr) {
+                let errorMsg = 'An error occurred. Please try again.';
+                if (xhr.responseJSON && xhr.responseJSON.error) {
+                    errorMsg = xhr.responseJSON.error;
+                } else if (xhr.responseJSON && xhr.responseJSON.errors) {
+                    const errors = xhr.responseJSON.errors;
+                    errorMsg = Object.values(errors).join('<br>');
+                }
+
+                // Show an error pop-up
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    html: errorMsg,
+                    confirmButtonColor: '#1C2A39'
+                });
+            }
+        });
+    });
 });
+
 
