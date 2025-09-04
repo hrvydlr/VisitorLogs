@@ -9,9 +9,13 @@
 @use 'visitor';
 @use 'show';
 @use 'index';
+@use 'usertype';
+@use 'user';
 
 /* 2) Keep Bootstrap as @import for now (Bootstrap isn’t module-migrated yet) */
 @import 'bootstrap/scss/bootstrap';
-
+@import 'usertype';
+@import 'user';
+@import 'visitor';
 /* 3) Plain CSS/URL imports LAST (after all @use) */
 @import url('https://fonts.bunny.net/css?family=Nunito');
