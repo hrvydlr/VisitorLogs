@@ -10,7 +10,7 @@
             </h2>
             <p class="page-subtitle">Manage and monitor all registered ID entries</p>
         </div>
-    @endif
+ 
 
     @if (session('error'))
         <div class="alert alert-danger mt-3">

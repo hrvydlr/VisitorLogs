@@ -1,6 +1,5 @@
 @extends('layout')
 
-
 @section('content')
 <div class="main-content">
     <div id="show-container" class="d-flex flex-column align-items-center mb-3">
@@ -81,4 +80,9 @@
         </div>
     </div>
 </div>
+@include('components.toast')
 @endsection
+
+@push('scripts')
+@vite(['resources/js/Visitors.js'])
+@endpush

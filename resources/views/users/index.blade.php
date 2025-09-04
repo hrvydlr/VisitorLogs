@@ -92,5 +92,5 @@
 <script>
     let default_fields = {!! json_encode(config('constants.crud.users')) !!};
 </script>
-@vite(['resources/js/User.js', 'resources/sass/app.scss'])
+@vite(['resources/js/User.js'])
 @endpush
