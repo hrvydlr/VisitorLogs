@@ -19,7 +19,7 @@
                         <button class="accordion-button bg-transparent text-white collapsed" type="button"
                             data-bs-toggle="collapse" data-bs-target="#settingsCollapse" aria-expanded="false"
                             aria-controls="settingsCollapse">
-                            <i class="bi bi-gear fs-6 p-2"></i>
+                            <i class="bi bi-gear fs-5 p-2"></i>
                                 Settings
                         </button>
                     </h2>
@@ -67,4 +67,5 @@
         </ul>
     </div>
 </div>
+
 @endif

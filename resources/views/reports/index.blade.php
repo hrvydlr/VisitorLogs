@@ -1,18 +1,49 @@
-{{-- index.blade.php --}}
 @extends('layout')
 
 @section('content')
 <div class="container" id="report_container">
-
     <h2 class="reports">Reports</h2>
-    <!-- Existing Users Table -->
+    <button type="button" class="btn btn-primary mb-3" id="filterButton" data-bs-toggle="modal" data-bs-target="#filterModal">
+                <i class="fas fa-filter"></i> Filter Report
+            </button>
     <div class="card">
-        <div class="card-body">
+        <div class="card-body py-4">
            
             <h5 class="card-title">Reports</h5>
-
             <div class="table-responsive-sm table-responsive-md table-responsive-lg">
                 <table class="table table-bordered" id="reportsTable"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="filterModalLabel">Filter Reports</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body fs-5">
+                <form id="filterForm" class="w-100">
+                    <div class="mb-3 w-100">
+                        <label for="visitorTypeFilter" class="form-label">Visitor Type</label>
+                        <select class="form-select form-select-lg w-100 mt-1 mb-1" id="visitorTypeFilter" name="visitor_type">
+                            <option value="">All Visitor Types</option>
+                            <option value="OJT">OJT</option>
+                            <option value="Trainee">Trainee</option>
+                            <option value="Applicant">Applicant</option>
+                        </select>
+                    </div>
+                    <div class="mb-3 w-100">
+                        <label for="visitDateFilter" class="form-label">Visit Date</label>
+                        <input type="date" class="form-control form-control-lg w-100 mt-1 mb-1" id="visitDateFilter" name="visit_date">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                    <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary px-4 border-0" id="applyFilterBtn">Apply Filter</button>
             </div>
         </div>
     </div>

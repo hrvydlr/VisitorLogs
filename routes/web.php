@@ -108,3 +108,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/visitor_types', [CommonController::class, 'visitor_types'])->name('common.visitor_types');
     });
 });
+
+
+Route::get('/reports/list', [ReportsController::class, 'list'])->name('reports.list');
