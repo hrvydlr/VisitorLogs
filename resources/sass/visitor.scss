@@ -1,10 +1,23 @@
-   #btn-addUsers{
-            position: relative; 
-            right: 25px; 
-            padding: 12px;
-   }
+//    #btn-addUsers{
+//     font-size: 1rem;
+//     font-weight: 600;
+//     border: none;
+//     border-radius: 9999px;
+//     background-color: #0b4da1 !important;
+//     color: white;
+//     box-shadow: 0 4px 6px ;
+//     transition: transform 0.2s ease, box-shadow 0.2s ease;
+//     cursor: pointer;
+//     position: absolute;
+//     // right: 5%;
+//     // top: 13%;
+//     &:hover {
+//       transform: translateY(-2px);
+//     //   background: darken($primary-c, 5%);
+//       box-shadow: 0 6px 12px;
+//     }
+//    }
 
-   
    .card {
             width: 120%; 
             position : relative; 

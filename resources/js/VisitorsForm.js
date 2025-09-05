@@ -17,7 +17,7 @@ $(document).ready(function() {
     // const $camera = $(CAMERA_SEL);
     // if ($camera.length && window.Webcam) {
     //     try {
-    //         Webcam.set({ width: 320, height: 240, image_format: 'jpeg', jpeg_quality: 90 });
+    //         Webcam.set({ width: 320, height: 320, image_format: 'jpeg', jpeg_quality: 90 });
     //         Webcam.attach(CAMERA_SEL);
     //     } catch (e) {
     //         console.error('Webcam initialization failed:', e);

@@ -2,7 +2,7 @@
 
 @section('button')
     <div class="d-flex justify-content-end align-items-center mt-5 pt-5 w-100" >
-        <a href="{{ route('visitor.form') }}" class="btn btn-primary btn-md rounded-pill" target="_blank"  id="btn-addUsers"><i class="bi bi-plus-circle"></i> Add Visitor</a>
+        <a href="{{ route('visitor.form') }}" class="btn btn-primary btn-md rounded-3 btn-addUT" target="_blank"  id="btn-addUsers"><i class="bi bi-plus-circle "></i> Add Visitor</a>
     </div>
 @endsection
 
@@ -12,7 +12,7 @@
     <!-- Existing Users Table -->
     <div class="card">
         <div class="card-body" >
-            <h5 class="card-title">All Users</h5>
+            {{-- <h5 class="card-title">All Users</h5> --}}
             <div class="table-responsive-sm table-responsive-md table-responsive-lg visitor-table-responsive">
                 <table class="table table-bordered visitor-data-table" id="visitorsTable"></table>
             </div>
