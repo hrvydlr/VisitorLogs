@@ -8,14 +8,11 @@
 @use 'modal';
 @use 'visitor';
 @use 'show';
-@use 'index';
-@use 'usertype';
-@use 'user';
+@use 'index';// This is where your table-card styles should be defined
+@use 'settings';
 
-/* 2) Keep Bootstrap as @import for now (Bootstrap isn’t module-migrated yet) */
+/* 2) Keep Bootstrap as @import for now */
 @import 'bootstrap/scss/bootstrap';
-@import 'usertype';
-@import 'user';
-@import 'visitor';
-/* 3) Plain CSS/URL imports LAST (after all @use) */
+
+/* 3) Plain CSS/URL imports LAST */
 @import url('https://fonts.bunny.net/css?family=Nunito');
