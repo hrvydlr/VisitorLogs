@@ -24,6 +24,16 @@
             bottom: 30px;
             overflow-x: hidden; /* Optional, helps avoid scrollbars inside card */
         }
+/* ✅ Visitor SCSS (aligned with UserType SCSS) */
+
+$primary-color: #165999;
+$background-color: #ffffff;
+$card-bg: #ffffff;
+$text-color: #1f2937;
+$heading-color: #111827;
+$shadow-light: rgba(0, 0, 0, 0.05);
+$shadow-dark: rgba(0, 0, 0, 0.1);
+$secondary-text: #6b7280;
 
 *, *::before, *::after { box-sizing: border-box; }
 
