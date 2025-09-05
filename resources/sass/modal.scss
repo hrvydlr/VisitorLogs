@@ -1,5 +1,35 @@
 @import 'variables';
 
+#notificationContainer {
+    .modal-body {
+        color: $modal-text-color;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        margin-top: 15px;
+        margin-left: -80px; 
+        margin-bottom: -45px;
+    }
+
+    .card-body {
+        width: 410px;
+        max-width: 100%;  
+    }
+}
+
+/* --- Responsive Fix --- */
+@media (max-width: 768px) {
+    #notificationContainer .modal-body {
+        margin-left: 0;    
+    }
+
+    #notificationContainer .card-body {
+        width: 100%;        
+    }
+}
+
 .modal-header {
     background-color: $main-color;
     color: $main-text-color; /* Light background for header */
@@ -10,8 +40,9 @@
     color: $modal-text-color; /* Light background for header */ ;
     display: flex;
     align-items: center;
-    margin-top: 30px;
 }
+
+
 
 .modal-body .card-body {
     width: 380px;

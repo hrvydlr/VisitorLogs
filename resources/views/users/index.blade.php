@@ -1,66 +1,25 @@
 @extends('layout')
-<head>
-    <style>
-
-    </style>
-</head>
-</body>
-
-
-@section('button')
-    <div class="d-flex justify-content-end align-items-center mt-5 pt-5 w-100" id="user_index">
-        <button type="button" class="btn btn-primary btn-md rounded-pill" id="btn-addUsers"><i class="bi bi-plus-circle"></i> Add User</button>
-    </div>
-@endsection
-
-
-@section('content')
-<div class="container" id="user_index">
-    <h2 class="user" >User</h2>
-    <!-- Existing Users Table -->
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">All Users</h5>
-
-            <div class="table-responsive-sm table-responsive-md table-responsive-lg ">
-                <table class="table table-bordered" id="usersTable"></table>
-            <table class="table table-bordered" id="usersTable"></table>
 
 @section('content')
 <div class="user-types-container mt-4">
     <div class="page-header">
         <div class="header-content">
             <h2 class="page-title">
-                <i class="bi bi-person-circle title-icon"></i> Users
+                <i class="title-icon"></i>Users
             </h2>
             <p class="page-subtitle">Manage and organize user accounts and their details</p>
-        </div>
-        <div class="header-stats">
-            <div class="stat-card">
-                <div class="stat-value">50</div> {{-- Example value --}}
-                <div class="stat-label">Total Users</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value">45</div> {{-- Example value --}}
-                <div class="stat-label">Active</div>
-            </div>
+           
+                <button type="button" 
+                        class="btn btn-primary btn-md rounded-3 btn-addUT  mb-2 justify-content-end" 
+                        id="btn-addUsers">
+                    <i class="bi bi-plus-circle"></i> Add User
+                </button>
         </div>
     </div>
 
-    <div class="table-card">
-        <div class="card-header">
-            <div class="header-left">
-                <h5 class="card-title">All Users</h5>
-            </div>
-            <div class="header-right">
-                <button type="button" class="btn-addUT" id="btn-addUsers">
-                    <i class="bi bi-plus-circle"></i> Add User
-                </button>
-            </div>
-        </div>
-
+    <div class="table-card table-card-fixed-height py-4">
         <div class="table-container">
-            <table class="table modern-table" id="usersTable">
+            <table class="table modern-table border border-dark-subtle" id="usersTable">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -93,4 +52,5 @@
     let default_fields = {!! json_encode(config('constants.crud.users')) !!};
 </script>
 @vite(['resources/js/User.js'])
+@vite('resources/sass/app.scss')
 @endpush

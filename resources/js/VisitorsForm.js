@@ -17,7 +17,7 @@ $(document).ready(function() {
     // const $camera = $(CAMERA_SEL);
     // if ($camera.length && window.Webcam) {
     //     try {
-    //         Webcam.set({ width: 320, height: 240, image_format: 'jpeg', jpeg_quality: 90 });
+    //         Webcam.set({ width: 320, height: 320, image_format: 'jpeg', jpeg_quality: 90 });
     //         Webcam.attach(CAMERA_SEL);
     //     } catch (e) {
     //         console.error('Webcam initialization failed:', e);
@@ -48,14 +48,74 @@ $(document).ready(function() {
     // }
 
 
-        // Save form
-        $(FORM_SEL).on('submit', function (e) {
-            e.preventDefault();
-          
-            common.saveForm(URL_BASE + 'save',TABLE_SEL,FORM_SEL,new FormData(this));
-        });
+        // ──────────────────────────────────────────────────────────────
+    // Form Submission
+    // ──────────────────────────────────────────────────────────────
+    $(FORM_SEL).on('submit', function(e) {
+        e.preventDefault();
 
+        const form = $(this)[0];
+        if (form.checkValidity() === false) {
+            e.stopPropagation();
+            $(this).addClass('was-validated');
+            return;
+        }
+
+        let formData = new FormData(form);
+
+        $.ajax({
+            url: URL_BASE + 'save',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            headers: {
+                'X-CSRF-TOKEN': CSRF_TOKEN
+            },
+            success: function(response) {
+                Swal.fire({
+                    toast: true,
+                    icon: 'success',
+                    title: response.message, 
+                    animation: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000,
+                    timerProgressBar: true
+                }).then(() => {
+                    window.location.href = URL_BASE;
+                });
+            },
+            error: function(xhr) {
+                let errorMsg = 'An error occurred. Please try again.';
+                if (xhr.responseJSON && xhr.responseJSON.error) {
+                    errorMsg = xhr.responseJSON.error;
+                } else if (xhr.responseJSON && xhr.responseJSON.errors) {
+                    const errors = xhr.responseJSON.errors;
+                    errorMsg = Object.values(errors).join('<br>');
+                }
+
+                // Show an error pop-up
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    html: errorMsg,
+                    confirmButtonColor: '#1C2A39'
+                });
+            }
+        });
+    });
+
+        window.clearForm = function() {
+        // Reset the form to its initial state
+        document.getElementById("visitorsForm").reset();
         
-    
+        // Also remove any Bootstrap validation classes
+        $('#visitorsForm').removeClass('was-validated');
+        
+        // Optional: If you had a hidden input for the captured image, clear it as well
+        $('#captured_image').val(''); 
+    };
 });
+
 
