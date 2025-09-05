@@ -1,70 +1,52 @@
-//    #btn-addUsers{
-//     font-size: 1rem;
-//     font-weight: 600;
-//     border: none;
-//     border-radius: 9999px;
-//     background-color: #0b4da1 !important;
-//     color: white;
-//     box-shadow: 0 4px 6px ;
-//     transition: transform 0.2s ease, box-shadow 0.2s ease;
-//     cursor: pointer;
-//     position: absolute;
-//     // right: 5%;
-//     // top: 13%;
-//     &:hover {
-//       transform: translateY(-2px);
-//     //   background: darken($primary-c, 5%);
-//       box-shadow: 0 6px 12px;
-//     }
-//    }
+/* ✅ Unified SCSS — User Types, Visitor Types, Registered IDs */
 
-   .card {
-            width: 120%; 
-            position : relative; 
-            bottom: 30px;
-            overflow-x: hidden; /* Optional, helps avoid scrollbars inside card */
-        }
+$primary-color: #0B4DA1;
+$background-color: #ffffff;
+$card-bg: #ffffff;
+$text-color: #1f2937;
+$heading-color: #111827;
+$shadow-light: rgba(0, 0, 0, 0.05);
+$shadow-dark: rgba(0, 0, 0, 0.1);
+$secondary-text: #6b7280;
 
 *, *::before, *::after { box-sizing: border-box; }
 
 body {
   background: $background-color;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: $text-color;
   margin: 0;
   padding: 0;
   line-height: 1.6;
 }
 
-#visitorLog {
-  .visitor-container {
-    padding: 2rem;
-    padding-left: 280px;
-    max-width: 1500px;
-    margin: 0 auto;
-  }
+
+
 
   // Page Header
   .page-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
     flex-wrap: wrap;
     gap: 1.5rem;
+    
   }
 
   .header-content {
     h2.page-title {
       color: $heading-color;
-      font-weight: 800%;
-      font-size: 10rem;
+      font-weight: 600;
+      font-size: 2rem;
       margin-bottom: 0.5rem;
       display: flex;
       align-items: center;
+      margin-top: 20px;
+      
     }
     .title-icon { font-size: 1.75rem; margin-right: 1rem; color: $primary-color; }
-    .page-subtitle { font-size: 0.95rem; color: $secondary-text; }
+    .page-subtitle { font-size: 0.95rem; color: $secondary-text; margin-bottom: 0px;}
+    
   }
 
   // Table Card
@@ -73,17 +55,20 @@ body {
     border-radius: 1rem !important;
     box-shadow: 0 8px 15px $shadow-light !important;
     padding: 1.25rem;
-    border: none !important;
+    border: #464a5246 1px solid !important;
+    
   }
 
   .table-container {
-    overflow-x: auto;
-    border-color: #111827;
+    overflow: hidden;
   }
 
-  // Visitors Table
+  // Modern Table (applies to all tables)
   .modern-table,
-  #visitorsTable {
+  #userType,
+  #usersTable,
+  #visitorTypeTable,
+  #registeredidTable {
     width: 100% !important;
     border-collapse: collapse !important;
     background: white !important;
@@ -111,6 +96,7 @@ body {
       font-size: 0.85rem;
       color: #374151;
       vertical-align: middle;
+      height: 20px;
     }
 
     tbody tr {
@@ -120,25 +106,36 @@ body {
     }
   }
 
-  // Column width
-  #visitorsTable th:first-child,
-  #visitorsTable td:first-child { width: 60px; }
+  // Column width control per table
+  #usersTable th:first-child,
+  #usersTable td:first-child,
+  #visitorTypeTable th:first-child,
+  #visitorTypeTable td:first-child,
+  #registeredidTable th:first-child,
+  #registeredidTable td:first-child { width: 60px; }
 
-  #visitorsTable th:last-child,
-  #visitorsTable td:last-child { width: 120px; }
+  #usersTable th:last-child,
+  #usersTable td:last-child,
+  #visitorTypeTable th:last-child,
+  #visitorTypeTable td:last-child,
+  #registeredidTable th:last-child,
+  #registeredidTable td:last-child { width: 120px; }
 
-  // Add Visitor Button
-  #btn-addUsers {
-    padding: 12px 24px;
+  // Buttons
+  .btn-addUT {
+
     font-size: 1rem;
     font-weight: 600;
     border: none;
-    border-radius: 9999px;
-    background: $primary-color;
+    background: $primary-color !important;
     color: white;
     box-shadow: 0 4px 6px $shadow-light;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
+    position: absolute;
+    right: 3%;
+    top: 14%;
+
 
     &:hover {
       transform: translateY(-2px);
@@ -146,10 +143,12 @@ body {
       box-shadow: 0 6px 12px $shadow-dark;
     }
   }
-
+#page-link {
+  background: $primary-color;
+}
   // Responsive
   @media (min-width: 1400px) {
-    .visitor-container { max-width: 1600px; padding: 3rem; padding-left: 320px; }
+    .user-types-container { max-width: 2000px; padding: 3rem; padding-left: 320px; }
     .modern-table thead th, .modern-table tbody td { padding: 1rem !important; }
   }
 
@@ -159,4 +158,4 @@ body {
     .modern-table thead th { font-size: 0.7rem; padding: 0.5rem !important; }
     .modern-table tbody td { font-size: 0.8rem; padding: 0.75rem !important; }
   }
-}
+
