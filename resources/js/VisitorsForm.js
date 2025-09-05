@@ -14,38 +14,38 @@ $(document).ready(function() {
     // ──────────────────────────────────────────────────────────────
     // Webcam (only if camera container exists on page)
     // ──────────────────────────────────────────────────────────────
-    const $camera = $(CAMERA_SEL);
-    if ($camera.length && window.Webcam) {
-        try {
-            Webcam.set({ width: 320, height: 320, image_format: 'jpeg', jpeg_quality: 90 });
-            Webcam.attach(CAMERA_SEL);
-        } catch (e) {
-            console.error('Webcam initialization failed:', e);
-        }
+    // const $camera = $(CAMERA_SEL);
+    // if ($camera.length && window.Webcam) {
+    //     try {
+    //         Webcam.set({ width: 320, height: 320, image_format: 'jpeg', jpeg_quality: 90 });
+    //         Webcam.attach(CAMERA_SEL);
+    //     } catch (e) {
+    //         console.error('Webcam initialization failed:', e);
+    //     }
 
-        const takeSnapshot = () => {
-            Webcam.snap((dataURI) => {
-                const $input = $('#captured_image');
-                if ($input.length && $camera.length) {
-                    $input.val(dataURI);
-                    $camera.html(`<img src="${dataURI}" class="img-thumbnail">`);
-                }
-            });
-        };
+    //     const takeSnapshot = () => {
+    //         Webcam.snap((dataURI) => {
+    //             const $input = $('#captured_image');
+    //             if ($input.length && $camera.length) {
+    //                 $input.val(dataURI);
+    //                 $camera.html(`<img src="${dataURI}" class="img-thumbnail">`);
+    //             }
+    //         });
+    //     };
 
-        const retakeSnapshot = () => {
-            const $input = $('#captured_image');
-            if ($input.length && $camera.length) {
-                $input.val('');
-                $camera.empty();
-                try { Webcam.attach(CAMERA_SEL); } catch (_) {}
-            }
-        };
+    //     const retakeSnapshot = () => {
+    //         const $input = $('#captured_image');
+    //         if ($input.length && $camera.length) {
+    //             $input.val('');
+    //             $camera.empty();
+    //             try { Webcam.attach(CAMERA_SEL); } catch (_) {}
+    //         }
+    //     };
 
-        // Capture / Recapture buttons (bind if present)
-        $('#captureBtn').on('click', takeSnapshot);
-        $('#recaptureBtn').on('click', retakeSnapshot);
-    }
+    //     // Capture / Recapture buttons (bind if present)
+    //     $('#captureBtn').on('click', takeSnapshot);
+    //     $('#recaptureBtn').on('click', retakeSnapshot);
+    // }
 
 
         // ──────────────────────────────────────────────────────────────
