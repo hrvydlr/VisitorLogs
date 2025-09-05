@@ -25,7 +25,7 @@ class VisitorController extends Controller
         $record_id =  $request->id;
         $validator = Validator::make($request->all(),[
             'id_number' => 'required|string|min:3|max:4',
-    'visitor_type' => 'required|exists:visitor_types,id',
+    'visitor_type' => 'required|exists:visitors_types,id',
     'first_name' => 'required|string|max:255',
     'middle_name' => 'nullable|string|max:255',
     'last_name' => 'required|string|max:255',
@@ -210,7 +210,7 @@ class VisitorController extends Controller
                 'fullname'      => $visitor->first_name . ' ' . $visitor->middle_name . ' ' . $visitor->last_name,
                 'number'        => $visitor->number,
                 'address'       => $visitor->address,
-                'visitor_type'  => $visitor->visitorType ? $visitor->visitorType->type_name : 'N/A',
+                'visitor_type'  => $visitor->visitorType ? $visitor->visitorType->name : 'N/A',
                 'id_number'     => $visitor->id_number,
                 'image_path'    => $visitor->image_path,
                 'visit_date'    => $visitor->visit_date,

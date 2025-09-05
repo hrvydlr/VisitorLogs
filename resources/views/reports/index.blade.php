@@ -4,7 +4,7 @@
 @section('content')
 <div class="container" id="report_container">
 
-    <h2 class="reports">Reports</h2>
+    <h2 class="reports fw-bold">Reports</h2>
     <!-- Existing Users Table -->
     <div class="card">
         <div class="card-body">
