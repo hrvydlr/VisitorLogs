@@ -31,7 +31,7 @@
                             </h5>
                             <div class="mb-3">
                                 <label class="form-label text-muted fw-bold">Visitor Type:</label>
-                                <input type="text" class="form-control" value="{{ $visitor->visitorType ? $visitor->visitorType->type_name : 'N/A' }}" readonly>
+                                <input type="text" class="form-control" value="{{ $visitor->visitorType ? $visitor->visitorType->name : 'N/A' }}" readonly>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label text-muted fw-bold">ID Number:</label>
