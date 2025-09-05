@@ -111,3 +111,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/visitors', [VisitorController::class, 'index'])->name('visitor.index');
     
 });
+
+
+Route::get('/reports/list', [ReportsController::class, 'list'])->name('reports.list');
