@@ -5,7 +5,7 @@
 <div class="main-content">
     <div id="show-container" class="d-flex flex-column align-items-center mb-3">
         <div class="d-flex w-100 justify-content-start align-items-center mb-4">
-            <a href="{{ route('visitor.index') }}" class="btn btn-link text-dark me-2">
+            <a href="javascript:history.back()" class="btn btn-link text-dark me-2">
                 <i class="bi bi-arrow-left fs-4"></i>
             </a>
             <h2 class="mb-1">Visitor Details</h2>

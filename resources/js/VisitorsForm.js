@@ -80,7 +80,7 @@ $(document).ready(function() {
                     animation: true,
                     position: 'top-end',
                     showConfirmButton: false,
-                    timer: 2000,
+                    timer: 1000,
                     timerProgressBar: true
                 }).then(() => {
                     window.location.href = URL_BASE;
@@ -105,6 +105,17 @@ $(document).ready(function() {
             }
         });
     });
+
+        window.clearForm = function() {
+        // Reset the form to its initial state
+        document.getElementById("visitorsForm").reset();
+        
+        // Also remove any Bootstrap validation classes
+        $('#visitorsForm').removeClass('was-validated');
+        
+        // Optional: If you had a hidden input for the captured image, clear it as well
+        $('#captured_image').val(''); 
+    };
 });
 
 

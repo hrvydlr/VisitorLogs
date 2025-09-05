@@ -12,8 +12,12 @@
        <div class="container-fluid form-container d-flex align-items-center justify-content-center mt-5" id="form-container">
         <div class="form-wrapper mt-5 p-5 w-75">
             <!-- Mobile Logo -->
-            <h1 class="form-title text-left mb-4">Welcome to Magellan Solutions!</h1>
-            
+            <div class="d-flex w-100 justify-content-start align-items-center mb-4">
+            <a href="{{ route('visitor.index') }}"  class="btn btn-link text-dark me-2">
+                <i class="bi bi-arrow-left fs-4"></i>
+            </a>
+            <h1 class="form-title text-left mt-3 mb-4">Welcome to Magellan Solutions!</h1>
+        </div>
             <form id="visitorsForm" class="needs-validation" novalidate>
                 <div class="row g-4">
                     <!-- Form Fields Section -->

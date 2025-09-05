@@ -209,7 +209,7 @@ class VisitorController extends Controller
                 'fullname'      => $visitor->first_name . ' ' . $visitor->middle_name . ' ' . $visitor->last_name,
                 'number'        => $visitor->number,
                 'address'       => $visitor->address,
-                'visitor_type'  => $visitor->visitorType ? $visitor->visitorType->type_name : 'N/A',
+                'visitor_type'  => $visitor->visitorType ? $visitor->visitorType->name : 'N/A',
                 'id_number'     => $visitor->id_number,
                 'image_path'    => $visitor->image_path,
                 'visit_date'    => $visitor->visit_date,

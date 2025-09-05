@@ -4,8 +4,8 @@
 
 
 .main-content {
-  margin-left: var(--sidebar-width);
-  padding: 20px;
+    margin-left: var(--sidebar-width);
+    padding: 20px;
 }
 
 #show-container {
@@ -16,26 +16,31 @@
     margin-right: auto;
 
     .card {
-    font-size: 18px;
-    padding: 20px;
-    width: 100%;
-    margin: 0 auto;
-}
+        font-size: 18px;
+        padding: 20px;
+        width: 100%;
+        margin: 0 auto;
+    }
 
     i {
         color:#0d4a8c;
     }
 
     h5 {
-    color: #0d4a8c;
-}
+        color: #0d4a8c;
+    }
 
     .image-container {
-    width: 320px; 
-    height: 320px;
-}
+        width: 320px; 
+        height: 320px;
+    }
 }
 
+@media screen and (min-width: 992px) and (max-width: 1799px) {
+    #show-container .card {
+        margin-left: -200px !important; 
+    }
+}
 
 @media (max-width: 600px) {
     .main-content {
@@ -49,78 +54,3 @@
         margin-bottom: 20px;
     }
 }
-
-#report_show {
-    .container h2 {
-        position: relative; 
-        top: 100px; 
-        left: 310px;
-    }
-
-    .card {
-        width: 75%; 
-        position: relative; 
-        top: 120px; 
-        font-size: 18px; 
-        padding: 20px; 
-        left: 300px;
-    }
-
-    .back_report {
-        position: relative; 
-        right: 25px;
-    }
-}
-
-#visitor_show {
-    .container h2 {
-        position: relative; 
-        top: 100px; 
-        left: 310px;
-    }
-
-    .card {
-        width: 75%; 
-        position: relative; 
-        top: 120px; 
-        font-size: 18px; 
-        padding: 20px; 
-        left: 300px;
-    }
-    .col-md-4 {
-        transform:scaleX(-1);
-    }
-
-    .btn {
-        position: relative; 
-        right: 25px;
-    }
-}
-
-// #guard_show {
-//     .container h2 {
-//         position: relative; 
-//         top: 100px; 
-//         left: 160px;
-//     }
-
-//     .card {
-//         width: 75%; 
-//         position: relative; 
-//         top: 120px; 
-//         font-size: 18px; 
-//         padding: 20px; 
-//         left: 150px;
-//     }
-
-//     .img-fluid {
-//          width: 400px; 
-//          height: auto; 
-//          object-fit: cover;
-//     }
-
-//     .btn {
-//         position: relative; 
-//         right: 25px;
-//     }
-// }
