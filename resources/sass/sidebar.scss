@@ -82,5 +82,10 @@
 
 .nav-link:hover, .accordion-button:hover {
     background-color: #3492E9 !important; 
-    border-radius: 2px;
+    border-radius: 8px;
+}
+
+.nav-link.active {
+    background-color: #3492E9 !important; 
+    border-radius: 8px;
 }

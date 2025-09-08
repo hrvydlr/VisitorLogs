@@ -6,8 +6,9 @@
 
             <!-- Visitor Log Sheets -->
             <li class="nav-item">
-            <a href="{{ route('visitor.index') }}" class="nav-link text-white mt-5">
-                <i class="bi bi-person-lines-fill text-white fs-6 p-2"></i>
+                <a href="{{ route('visitor.index') }}" 
+                   class="nav-link text-white mt-5 {{ request()->routeIs('visitor.index') ? 'active' : '' }}">
+                    <i class="bi bi-person-lines-fill text-white fs-6 p-2"></i>
                     Visitor Log Sheets
                 </a>
             </li>
@@ -16,41 +17,55 @@
             <li class="nav-item accordion bg-transparent w-100" id="settingsAccordion">
                 <div class="accordion-item bg-transparent border-0">
                     <h2 class="accordion-header">
-                        <button class="accordion-button bg-transparent text-white collapsed" type="button"
-                            data-bs-toggle="collapse" data-bs-target="#settingsCollapse" aria-expanded="false"
+                        <button class="accordion-button bg-transparent text-white 
+                            {{ request()->routeIs('usertype.*','users.*','visitortype.*','registered_id.*') ? '' : 'collapsed' }}" 
+                            type="button"
+                            data-bs-toggle="collapse" 
+                            data-bs-target="#settingsCollapse"
+                            aria-expanded="{{ request()->routeIs('usertype.*','users.*','visitortype.*','registered_id.*') ? 'true' : 'false' }}"
                             aria-controls="settingsCollapse">
                             <i class="bi bi-gear fs-5 p-2"></i>
-                                Settings
+                            Settings
                         </button>
                     </h2>
-                    <div id="settingsCollapse" class="accordion-collapse collapse"
-                        data-bs-parent="#settingsAccordion">
+                    <div id="settingsCollapse" 
+                         class="accordion-collapse collapse {{ request()->routeIs('usertype.*','users.*','visitortype.*','registered_id.*') ? 'show' : '' }}"
+                         data-bs-parent="#settingsAccordion">
                         <div class="accordion-body p-0">
                             <ul class="nav flex-column nav-treeview ps-3">
+
                                 <li class="nav-item">
-                                    <a href="{{ route('usertype.index') }}" class="nav-link">
-                                    <i class="bi bi-people-fill fs-6 p-2 "></i>
+                                    <a href="{{ route('usertype.index') }}" 
+                                       class="nav-link {{ request()->routeIs('usertype.*') ? 'active' : '' }}">
+                                        <i class="bi bi-people-fill fs-6 p-2"></i>
                                         User Type
                                     </a>
                                 </li>
+
                                 <li class="nav-item">
-                                    <a href="{{ route('users.index') }}" class="nav-link">
-                                    <i class="bi bi-person-add fs-6 p-2"></i>
+                                    <a href="{{ route('users.index') }}" 
+                                       class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
+                                        <i class="bi bi-person-add fs-6 p-2"></i>
                                         User 
                                     </a>
                                 </li>
+
                                 <li class="nav-item">
-                                    <a href="{{ route('visitortype.index') }}" class="nav-link">
-                                    <i class="bi bi-person-badge fs-6 p-2"></i>
-                                        Visitor type
+                                    <a href="{{ route('visitortype.index') }}" 
+                                       class="nav-link {{ request()->routeIs('visitortype.*') ? 'active' : '' }}">
+                                        <i class="bi bi-person-badge fs-6 p-2"></i>
+                                        Visitor Type
                                     </a>
                                 </li>
+
                                 <li class="nav-item">
-                                    <a href="{{ route('registered_id.index') }}" class="nav-link">
-                                    <i class="bi bi-person-vcard fs-6 p-2"></i>
+                                    <a href="{{ route('registered_id.index') }}" 
+                                       class="nav-link {{ request()->routeIs('registered_id.*') ? 'active' : '' }}">
+                                        <i class="bi bi-person-vcard fs-6 p-2"></i>
                                         ID Number
                                     </a>
                                 </li>
+
                             </ul>
                         </div>
                     </div>
@@ -59,13 +74,14 @@
 
             <!-- Reports -->
             <li class="nav-item">
-                <a href="{{ route('reports.index') }}" class="nav-link text-white">
-                <i class="bi bi-journals fs-6 p-2"></i>
+                <a href="{{ route('reports.index') }}" 
+                   class="nav-link text-white {{ request()->routeIs('reports.index') ? 'active' : '' }}">
+                    <i class="bi bi-journals fs-6 p-2"></i>
                     Reports
                 </a>
             </li>
+
         </ul>
     </div>
 </div>
-
 @endif
