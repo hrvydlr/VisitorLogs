@@ -11,7 +11,7 @@ class ReportsController extends Controller
 { 
     public function index()
     {
-        $visitors = Visitor::with('visitorType')->get();
+        $visitors       = Visitor::with('visitorType')->get();
         $visitorTypes = VisitorType::all();
         return view('reports.index', compact('visitors', 'visitorTypes'));
     }
@@ -41,6 +41,21 @@ class ReportsController extends Controller
         return view('reports.show', compact('visitor'));
     }
 
+<<<<<<< Updated upstream
+=======
+    public function getNameById(Request $request)
+    {
+        $visitorTypeId  = $request->input('visitor_type');
+        $visitorType    = VisitorType::find($visitorTypeId);
+
+        if ($visitorType) {
+            return response()->json(['name' => $visitorType->type_name]);
+        }
+
+        return response()->json(['name' => '']);
+    }
+
+>>>>>>> Stashed changes
     public function list(Request $request)
     {
         $keywords      = $request->input('search.value');
@@ -104,7 +119,7 @@ class ReportsController extends Controller
                 'fullname'      => $name,
                 'number'        => $visitor->number,
                 'address'       => $visitor->address,
-                'visitor_type'  => $visitor->visitorType ? $visitor->visitorType->name : 'N/A',
+                'visitor_type'  => visitor_type_name($visitor->id),
                 'id_number'     => $visitor->id_number,
                 'visit_date'    => $visitor->visit_date,
                 'time_in'       => $visitor->time_in,

@@ -24,13 +24,12 @@ class VisitorController extends Controller
     {
         $record_id =  $request->id;
         $validator = Validator::make($request->all(),[
-            'id_number' => 'required|string|min:3|max:4',
-    'visitor_type' => 'required|exists:visitors_types,id',
-    'first_name' => 'required|string|max:255',
-    'middle_name' => 'nullable|string|max:255',
-    'last_name' => 'required|string|max:255',
-    'number' => 'required|string',
-    'address' => 'required|string',
+            'id_number'     => 'required',
+            'visitor_type'  => 'required',
+            'first_name'    => 'required',
+            'last_name'     => 'required',
+            'number'        => 'required',
+            'address'       => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -210,7 +209,7 @@ class VisitorController extends Controller
                 'fullname'      => $visitor->first_name . ' ' . $visitor->middle_name . ' ' . $visitor->last_name,
                 'number'        => $visitor->number,
                 'address'       => $visitor->address,
-                'visitor_type'  => $visitor->visitorType ? $visitor->visitorType->name : 'N/A',
+                'visitor_type'  => visitor_type_name($visitor->id),
                 'id_number'     => $visitor->id_number,
                 'image_path'    => $visitor->image_path,
                 'visit_date'    => $visitor->visit_date,
@@ -245,14 +244,14 @@ class VisitorController extends Controller
 
     public function checkVisitorID($id_number, $visitor_type_id)
     {
-        $typeName = VisitorType::where('id', $visitor_type_id)->value('type_name');
+        $typeName = VisitorType::where('id', $visitor_type_id)->value('name');
 
         if (!$typeName) {
             return response()->json(['status' => 'invalid']);
         }
 
         $match = RegisteredID::where('id_number', $id_number)
-                    ->where('type_name', $typeName)
+                    ->where('name', $typeName)
                     ->first();
 
         return response()->json([
