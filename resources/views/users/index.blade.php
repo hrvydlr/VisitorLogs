@@ -1,16 +1,16 @@
 @extends('layout')
 
 @section('content')
-<div class="user-types-container mt-4">
-    <div class="page-header">
+<div class="user-types-container">
+    <div class="page-header mt-4">
         <div class="header-content">
             <h2 class="page-title">
-                <i class="title-icon"></i>Users
+                <i class="title-icon m-0"></i>Users
             </h2>
-            <p class="page-subtitle">Manage and organize user accounts and their details</p>
+            <p class="page-subtitle mb-3">Manage and organize user accounts and their details</p>
            
                 <button type="button" 
-                        class="btn btn-primary btn-md rounded-3 btn-addUT  mb-2 justify-content-end" 
+                        class="btn btn-primary btn-md rounded-3 btn-addUT mb-4 justify-content-end" 
                         id="btn-addUsers">
                     <i class="bi bi-plus-circle"></i> Add User
                 </button>
@@ -18,21 +18,9 @@
     </div>
 
     <div class="table-card table-card-fixed-height py-4">
-        <div class="table-container">
+        <div class="table-container table-responsive-sm table-responsive-md table-responsive-lg">
             <table class="table modern-table border border-dark-subtle" id="usersTable">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{-- Data will be populated by User.js --}}
-                </tbody>
+    
             </table>
         </div>
     </div>

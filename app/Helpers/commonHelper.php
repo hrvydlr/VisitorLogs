@@ -60,3 +60,11 @@ if(!function_exists("visitor_types")){
         return VisitorType::withoutTrashed()->get();
     }
 }
+
+if(!function_exists("visitor_type_name")){
+    function visitor_type_name($id){
+        $type = VisitorType::where('id', $id)->first();
+
+        return $type ? $type->name : "Unknown"; 
+    }
+}

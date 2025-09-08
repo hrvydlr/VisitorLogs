@@ -53,7 +53,7 @@ class RegisteredIDController extends Controller
             $newData[] = [
                 'id'             => $registeredID->id,
                 'id_number'      =>  $registeredID->id_number,
-                'visitor_type'   => $registeredID->visitorType ? $registeredID->visitorType->type_name : 'N/A',
+                'visitor_type'   => $registeredID->visitorType ? $registeredID->visitorType->name : 'N/A',
                 'created_at'     => Carbon::parse($registeredID->created_at)->setTimezone('Asia/Manila')->format('F j, Y, g:i a'),
                 'created_by'     => name($registeredID->created_by),
                 'updated_at'     => Carbon::parse($registeredID->updated_at)->setTimezone('Asia/Manila')->format('F j, Y, g:i a'),
