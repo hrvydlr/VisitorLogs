@@ -41,21 +41,18 @@ class ReportsController extends Controller
         return view('reports.show', compact('visitor'));
     }
 
-<<<<<<< Updated upstream
-=======
     public function getNameById(Request $request)
     {
         $visitorTypeId  = $request->input('visitor_type');
         $visitorType    = VisitorType::find($visitorTypeId);
 
         if ($visitorType) {
-            return response()->json(['name' => $visitorType->type_name]);
+            return response()->json(['name' => $visitorType->name]);
         }
 
         return response()->json(['name' => '']);
     }
 
->>>>>>> Stashed changes
     public function list(Request $request)
     {
         $keywords      = $request->input('search.value');
@@ -80,9 +77,10 @@ class ReportsController extends Controller
                 });
             })
             ->when($request->filled('visitor_type'), function ($query) use ($request) {
-                $query->whereHas('visitorType', function ($q) use ($request) {
-                    $q->where('name', $request->visitor_type);
-                });
+                $query->where('visitor_type', $request->visitor_type);
+                // $query->whereHas('visitorType', function ($q) use ($request) {
+                //     $q->where('id', $request->visitor_type);
+                // });
             })
             ->when($request->filled('visit_date'), function ($query) use ($request) {
                 $query->whereDate('visit_date', $request->visit_date);
@@ -119,7 +117,7 @@ class ReportsController extends Controller
                 'fullname'      => $name,
                 'number'        => $visitor->number,
                 'address'       => $visitor->address,
-                'visitor_type'  => visitor_type_name($visitor->id),
+                'visitor_type'  => visitor_type_name($visitor->visitor_type),
                 'id_number'     => $visitor->id_number,
                 'visit_date'    => $visitor->visit_date,
                 'time_in'       => $visitor->time_in,

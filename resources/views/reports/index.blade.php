@@ -33,9 +33,9 @@
                         <label for="visitorTypeFilter" class="form-label">Visitor Type</label>
                         <select class="form-select form-select-lg w-100 mt-1 mb-1" id="visitorTypeFilter" name="visitor_type">
                             <option value="">All Visitor Types</option>
-                            <option value="OJT">OJT</option>
-                            <option value="Trainee">Trainee</option>
-                            <option value="Applicant">Applicant</option>
+                            <option value=3>OJT</option>
+                            <option value=2>Trainee</option>
+                            <option value=1>Applicant</option>
                         </select>
                     </div>
                     <div class="mb-3 w-100">
