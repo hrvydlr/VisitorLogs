@@ -21,8 +21,6 @@ body {
 }
 
 
-
-
   // Page Header
   .page-header {
     display: flex;
@@ -161,3 +159,17 @@ body {
     .modern-table tbody td { font-size: 0.8rem; padding: 0.75rem !important; }
   }
 
+  @media (max-width: 430px) {
+    .page-title{
+      font-size: 1.5rem!important;
+      margin: 20px 15px!important;
+    }
+
+    .page-subtitle {
+      margin-left: 17px!important;
+    }
+    .btn-addUT{
+      // position:absolute!important;
+      margin-top: -25px!important;
+    }
+  }

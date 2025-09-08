@@ -19,7 +19,6 @@
                 </div>
                 <form id="visitorsForm" class="needs-validation" novalidate>
                     <div class="row g-4" id="row">
-                        {{-- Form Inputs Section --}}
                         <div class="col-lg-8">
                             <div class="row g-4">
                                 <div class="col-sm-6">
@@ -87,7 +86,7 @@
                                         Save
                                     </button>
                                     <button type="button" class="btn btn-cancel btn-lg px-4 w-45" onclick="clearForm()">
-                                        Cancel
+                                        Clear
                                     </button>
                                 </div>
                             </div>

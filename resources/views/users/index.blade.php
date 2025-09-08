@@ -1,16 +1,16 @@
 @extends('layout')
 
 @section('content')
-<div class="user-types-container mt-4">
-    <div class="page-header">
+<div class="user-types-container">
+    <div class="page-header mt-4">
         <div class="header-content">
             <h2 class="page-title">
-                <i class="title-icon"></i>Users
+                <i class="title-icon m-0"></i>Users
             </h2>
             <p class="page-subtitle mb-3">Manage and organize user accounts and their details</p>
            
                 <button type="button" 
-                        class="btn btn-primary btn-md rounded-3 btn-addUT  mb-2 justify-content-end" 
+                        class="btn btn-primary btn-md rounded-3 btn-addUT mb-4 justify-content-end" 
                         id="btn-addUsers">
                     <i class="bi bi-plus-circle"></i> Add User
                 </button>
