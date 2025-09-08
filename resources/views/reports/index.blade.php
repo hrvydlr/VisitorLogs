@@ -2,14 +2,14 @@
 
 @section('content')
 <div class="container" id="report_container">
-    <h2 class="reports">Reports</h2>
+    <h2 class="reports fw-bold ms-0">Reports</h2>
     <button type="button" class="btn btn-primary mb-3" id="filterButton" data-bs-toggle="modal" data-bs-target="#filterModal">
                 <i class="fas fa-filter"></i> Filter Report
             </button>
     <div class="card">
         <div class="card-body py-4">
            
-            <h5 class="card-title">Reports</h5>
+            {{-- <h5 class="card-title">Reports</h5> --}}
             <div class="table-responsive-sm table-responsive-md table-responsive-lg">
                 <table class="table modern-table  border border-dark-subtle" id="reportsTable">
                     <thead>

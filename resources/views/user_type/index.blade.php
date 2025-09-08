@@ -7,8 +7,8 @@
 <div class="user-types-container mt-4">
     <div class="page-header">
         <div class="header-content">
-            <h2 class="page-title">User Types</h2>
-            <p class="page-subtitle">Manage and organize different user roles and permissions</p>
+            <h2 class="page-title  mt-4 ml-1">User Types</h2>
+            <p class="page-subtitle mb-3">Manage and organize different user roles</p>
             <button type="button" 
                         class="btn btn-primary rounded-3 btn-addUT mb-1 justify-content-end" 
                         id="btn-addUT">

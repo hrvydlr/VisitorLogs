@@ -5,7 +5,7 @@
     <div class="page-header">
         <div class="header-content">
             <h2 class="page-title">Visitor Log Sheets</h2>
-            <p class="page-subtitle">Manage and track all visitor entries</p>
+            <p class="page-subtitle mb-3">Manage and track all visitor entries</p>
             <a href="{{ route('visitor.form') }}" class="btn btn-primary rounded-3 btn-addUT mb-1 justify-content-end" id="btn-addUsers">
                 <i class="bi bi-plus-circle"></i> Add Visitor
             </a>

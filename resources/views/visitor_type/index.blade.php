@@ -5,9 +5,9 @@
     <div class="page-header">
         <div class="header-content">
             <h2 class="page-title">
-                <i class="title-icon"></i>Visitor Types
+                <i class="title-icon m-0"></i>Visitor Types
             </h2>
-            <p class="page-subtitle">Manage and organize different visitor categories</p>
+            <p class="page-subtitle mb-3">Manage and organize different visitor categories</p>
             <button type="button" 
                         class="btn btn-primary btn-md rounded-3 btn-addUT" 
                         id="btn-addVT">

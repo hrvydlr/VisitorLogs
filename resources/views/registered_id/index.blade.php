@@ -6,9 +6,9 @@
     <div class="page-header">
         <div class="header-content">
             <h2 class="page-title">
-                <i class="title-icon"></i>Registered IDs
+                <i class="title-icon m-0"></i>Registered IDs
             </h2>
-            <p class="page-subtitle">Manage and monitor all registered ID entries</p>
+            <p class="page-subtitle mb-3">Manage and monitor all registered ID entries</p>
                <button type="button" 
                         class="btn btn-primary btn-md rounded-3 btn-addUT" 
                         id="btn-addID">
