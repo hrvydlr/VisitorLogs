@@ -8,7 +8,7 @@
             <h2 class="page-title">
                 <i class="title-icon"></i>Registered IDs
             </h2>
-            <p class="page-subtitle">Manage and monitor all registered ID entries</p>
+            <p class="page-subtitle mb-3">Manage and monitor all registered ID entries</p>
                <button type="button" 
                         class="btn btn-primary btn-md rounded-3 btn-addUT" 
                         id="btn-addID">
@@ -26,21 +26,9 @@
 
     <!-- Table Card -->
     <div class="table-card table-card-fixed-height py-4">
-        <div class="table-container">
+        <div class="table-container table-responsive-sm table-responsive-md table-responsive-lg">
             <table class="table modern-table" id="registeredidTable">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>ID Number</th>
-                        <th>Owner</th>
-                        <th>Created By</th>
-                        <th>Created Date</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Data will be populated by RegisteredId.js -->
-                </tbody>
+            
             </table>
         </div>
     </div>

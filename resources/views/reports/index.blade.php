@@ -1,21 +1,25 @@
 @extends('layout')
 
 @section('content')
-<div class="container" id="report_container">
-    <h2 class="reports">Reports</h2>
-    <button type="button" class="btn btn-primary mb-3" id="filterButton" data-bs-toggle="modal" data-bs-target="#filterModal">
-        <i class="fas fa-filter"></i> Filter Report
-    </button>
-    <div class="card">
-        <div class="card-body py-4">
-            <div class="table-responsive-sm table-responsive-md table-responsive-lg">
-                <table class="table modern-table border border-dark-subtle" id="reportsTable"></table>
-            </div>
+<div class="user-types-container mt-4">
+    <div class="page-header">
+        <div class="header-content">
+            <h2 class="page-title">Reports</h2>
+            <p class="page-subtitle mb-3">Monitor and track every logged visitor</p>
+           <button type="button" class="btn btn-primary rounded-3 btn-addUT mb-1 justify-content-end" id="filterButton" data-bs-toggle="modal" data-bs-target="#filterModal">
+                <i class="fas fa-filter"></i> Filter Report
+            </button>
+    
+        </div>
+    </div>
+
+    <div class="table-card py-4">
+        <div class="table-container table-responsive-sm table-responsive-md table-responsive-lg">
+            <table class="table modern-table border border-dark-subtle" id="reportsTable">
+            </table>
         </div>
     </div>
 </div>
-
-<!-- Filter Modal -->
 <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -52,6 +56,7 @@
 @push('scripts')
 <script>
     let default_fields = {!! json_encode(config('constants.crud.reports')) !!};
+
 </script>
 @vite(['resources/js/Reports.js'])
 @vite('resources/sass/app.scss')
