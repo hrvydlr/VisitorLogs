@@ -8,7 +8,7 @@
     <div class="page-header">
         <div class="header-content">
             <h2 class="page-title">User Types</h2>
-            <p class="page-subtitle">Manage and organize different user roles and permissions</p>
+            <p class="page-subtitle mb-3">Manage and organize different user roles and permissions</p>
             <button type="button" 
                         class="btn btn-primary rounded-3 btn-addUT mb-1 justify-content-end" 
                         id="btn-addUT">
@@ -19,20 +19,9 @@
     </div>
 
     <div class="table-card table-card-fixed-height py-4">
-        <div class="table-container">
+        <div class="table-container table-responsive-sm table-responsive-md table-responsive-lg">
             <table class="table modern-table border border-dark-subtle" id="userType">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Created By</th>
-                        <th>Updated By</th>
-                        <th>Created Date</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
+            
             </table>
         </div>
     </div>

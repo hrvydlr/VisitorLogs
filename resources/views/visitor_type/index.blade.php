@@ -7,7 +7,7 @@
             <h2 class="page-title">
                 <i class="title-icon"></i>Visitor Types
             </h2>
-            <p class="page-subtitle">Manage and organize different visitor categories</p>
+            <p class="page-subtitle mb-3">Manage and organize different visitor categories</p>
             <button type="button" 
                         class="btn btn-primary btn-md rounded-3 btn-addUT" 
                         id="btn-addVT">
@@ -17,21 +17,9 @@
         </div>
 
     <div class="table-card table-card-fixed-height py-4">
-        <div class="table-container">
+        <div class="table-container table-responsive-sm table-responsive-md table-responsive-lg">
             <table class="table modern-table border border-dark-subtle" id="visitorTypeTable">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Created By</th>
-                        <th>Updated By</th>
-                        <th>Created Date</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Data will be populated by VisitorType.js -->
-                </tbody>
+                
             </table>
         </div>
     </div>
