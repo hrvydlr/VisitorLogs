@@ -41,21 +41,18 @@ class ReportsController extends Controller
         return view('reports.show', compact('visitor'));
     }
 
-<<<<<<< Updated upstream
-=======
     public function getNameById(Request $request)
     {
         $visitorTypeId  = $request->input('visitor_type');
         $visitorType    = VisitorType::find($visitorTypeId);
 
         if ($visitorType) {
-            return response()->json(['name' => $visitorType->type_name]);
+            return response()->json(['name' => $visitorType->name]);
         }
 
         return response()->json(['name' => '']);
     }
 
->>>>>>> Stashed changes
     public function list(Request $request)
     {
         $keywords      = $request->input('search.value');
